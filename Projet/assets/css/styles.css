@@ -3,8 +3,15 @@
     box-sizing: border-box;
     
 }
+.montserrat{
+  font-family: 'Montserrat', sans-serif;
+}
+h1{
+    color: rgba(255, 196, 0, 0.856);
+    font-family: 'Montserrat', sans-serif;
+}
 
-h1 ,h5,h4 a, h5 a{
+h5,h4 a, h5 a{
     font-family: 'Indie Flower';
     color: rgb(255, 140, 8);
 }
@@ -14,12 +21,19 @@ li{
   list-style-type: none;
 }
 
-h2,h3,.card{
-  font-family: 'Indie Flower';
+h3,h2,h4{
+  font-family: 'Montserrat', sans-serif;
+  
+}
+
+.card{
+   font-family: 'Indie Flower'; 
 }
 
 h6{
-  font-size: 2em;
+  font-size: 1.5em;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing:-0.1em;
 }
 
 html , body{
@@ -107,7 +121,7 @@ nav ul li a:hover{
 
 
 .card{ 
-  width: 15em;
+  width: 10em;
   height: 20em;
 }
 
@@ -211,17 +225,22 @@ h6:hover{
     font-size: 36px;
     margin-left: 50px;
   }
+
+  
   
   @media screen and (max-height: 550px) {
     .sidenav {padding-top: 0.5em;}
     .sidenav a {font-size: 0.5em;}
-    .card{ width: 15em;
-      height: 25em;}
+    .card{ width: 13em;
+      height: 23em;}
     nav ul li a:hover{
         border-radius:20%;
       }
       nav a h6{
         font-size:1.8em;
+      }
+      .basse a{
+        font-size: 0.8em;
       }
   }
   

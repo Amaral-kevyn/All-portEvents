@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     }
 }
-require_once dirname(__FILE__).'/../Controllers/header_ctrl.php';
+require_once dirname(__FILE__).'/../Controller/header_ctrl.php';
 require_once dirname(__FILE__).'/../View/navbar.php';
 require_once dirname(__FILE__).'/../View/navbarBottom.php';
 require_once dirname(__FILE__).'/../View/upload.php';

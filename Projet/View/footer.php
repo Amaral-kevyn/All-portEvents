@@ -2,7 +2,7 @@
         <div class="container-fluid text-center text-white text-md-left">
             <div class="row">
                 <div class="col-md-4 mt-md-0 mt-3 text-center">
-                    <h5 class="text-uppercase mt-2">A propos de nous</h5>
+                    <h4 class="text-uppercase mt-2 orange h5" style='letter-spacing:-0.1em;'>A propos de nous</h4>
                     <p class="mt-4"> Petite entreprise à taille humaine , je propose de vous faire participez
                         ou créer des évenements sportifs ,
                         afin de vous réunir pour vos activités.
@@ -12,7 +12,7 @@
 
                 <hr class="clearfix w-100 d-md-none pb-3">
                 <div class="col-md-4 mb-md-0 mb-3 text-center">
-                    <h5 class="text-uppercase mt-2">Contact</h5>
+                    <h4 class="text-uppercase mt-2 orange h5" style='letter-spacing:-0.1em;'>Contact</h4>
                     <ul class="list-unstyled">
                         <li>
                             <!--Email-->
@@ -29,20 +29,19 @@
                 </div>
                 <div class="col-md-4 mb-md-0 mb-3 text-center">
                     <!--Information légales-->
-                    <h5 class="text-uppercase mt-2">Informations légales</h5>
+                    <h4 class="text-uppercase mt-2 orange h5"style='letter-spacing:-0.1em;'>Informations légales</h4>
                     <ul class="list-unstyled mt-4">
                         <li>
                             <a href="../View/legals.php" class="list-footer blanc" target="_blank">Mentions
                                 Légales</a>
                         </li>
-
                     </ul>
                 </div>
-            </div>
+                 <!--Copyright-->
+                 <div class=" col-12 footer-copyright text-center py-4 text-white mb-5">© 2020 Copyright:
+            <a class="text-warning m-auto">By Amaral Kevyn.</a>
         </div>
-        <!--Copyright-->
-        <div class="footer-copyright text-center py-3 text-white">© 2020 Copyright:
-            <a class="text-warning">By Amaral Kevyn.</a>
+            </div>
         </div>
 
         </div>

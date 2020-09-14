@@ -9,15 +9,17 @@ require_once dirname(__FILE__).'/../utils/Database.php';
         private $email;
         private $pseudo;
         private $password;
+        private $photo;
         private $zipCode;
         private $civility;
-        private $cle;
         private $actif;
+        private $token;
+        private $dateOfCreation;
         private $admin_id;
         private $db;
     
 
-        public function __construct($_users_id =0,$_lastname='',$_firstname='',$_birthdate='',$_email='',$_pseudo='',$_password='',$_zipCode='',$_civility='',$_cle=0,$_actif=0,$admin=0)
+        public function __construct($_users_id =0,$_lastname='',$_firstname='',$_birthdate='',$_email='',$_pseudo='',$_password='',$_photo='',$_zipCode='',$_civility='',$_actif=0,$_token='',$_dateOfCreation='',$_admin_id=65498)
         {
             
             $this->users_id = $_users_id;
@@ -27,11 +29,13 @@ require_once dirname(__FILE__).'/../utils/Database.php';
             $this->email = $_email;
             $this->pseudo = $_pseudo;
             $this->password = $_password;
+            $this->photo = $_photo;
             $this->zipCode = $_zipCode;
             $this->civility = $_civility;
-            $this->cle = $_cle;
             $this->actif = $_actif;
-            $this->roles_id = $_roles_id;
+            $this->token = $_token;
+            $this->dateOfCreation = $_dateOfCreation;
+            $this->admin_id = $_admin_id;
             $this->db = Databases::getInstance();
         }
          // Création d'une méthode magique getter qui permettra de créer dynamiquement un getter pour chaque attribut existant.
@@ -56,7 +60,7 @@ require_once dirname(__FILE__).'/../utils/Database.php';
 
         public function create()
 		{
-			$insertUser = 'INSERT INTO `users`(`lastname`, `firstname`,`birthdate`,`email`,`pseudo`, `password`, `photo`,`zipCode`,`civility`,`cle`,`actif`, `admin_id`) VALUES (:lastname, :firstname, :birthdate, :email,:pseudo, :password, :photo, :zipCode, :civility, :cle, :actif, :admin_id )';
+			$insertUser = 'INSERT INTO `users`(`lastname`,`firstname`,`birthdate`,`email`,`pseudo`,`password`,`photo`,`zipCode`,`civility`,`actif`,`token`,`admin_id`) VALUES (:lastname, :firstname, :birthdate, :email, :pseudo, :password, :photo, :zipCode, :civility, :actif, :token, :admin_id)';
             $usersStatement = $this->db->prepare($insertUser);
             // $usersStatement->bindValue(':id_user', $this->id_user,PDO::PARAM_INT);
 			$usersStatement->bindValue(':lastname', $this->lastname,PDO::PARAM_STR);
@@ -64,11 +68,12 @@ require_once dirname(__FILE__).'/../utils/Database.php';
             $usersStatement->bindvalue(':birthdate',$this->birthdate,PDO::PARAM_STR);
             $usersStatement->bindvalue(':email',$this->email,PDO::PARAM_STR);
             $usersStatement->bindvalue(':pseudo',$this->pseudo,PDO::PARAM_STR);
+            $usersStatement->bindvalue(':password',$this->password,PDO::PARAM_STR);
             $usersStatement->bindvalue(':photo',$this->photo,PDO::PARAM_STR);
             $usersStatement->bindvalue(':zipCode',$this->zipCode,PDO::PARAM_INT);
             $usersStatement->bindvalue(':civility',$this->civility,PDO::PARAM_INT);
-            $usersStatement->bindvalue(':cle',$this->cle,PDO::PARAM_INT);
             $usersStatement->bindvalue(':actif',$this->actif,PDO::PARAM_INT);
+            $usersStatement->bindvalue(':token',$this->token,PDO::PARAM_STR);
             $usersStatement->bindvalue(':admin_id',$this->admin_id,PDO::PARAM_INT);
 
 			return $usersStatement->execute();
@@ -77,7 +82,7 @@ require_once dirname(__FILE__).'/../utils/Database.php';
         public function readSingle()
 		{
 			// :nomDeVariable pour les données en attentes
-			$sql_viewUsers = 'SELECT `users_id`, `lastname`, `firstname`,DATE_FORMAT(`birthdate`,"%d/%m/%Y") AS birthdate_format,`birthdate`,`email`,`pseudo`,`civility`,`admin_id` FROM `users` WHERE `users_id` = :users_id';
+			$sql_viewUsers = 'SELECT `users_id`, `lastname`, `firstname`,DATE_FORMAT(`birthdate`,"%d/%m/%Y") AS birthdate_format,`birthdate`,`email`,`pseudo`,`civility`,`admin_id`,`civility`,`dateOfCreation`,`zipCode` FROM `users` WHERE `users_id` = :users_id';
             $usersStatement = $this->db->prepare($sql_viewUsers);
             $usersStatement->bindValue(':users_id', $this->users_id,PDO::PARAM_INT);
 			$usersView = null;
@@ -111,7 +116,7 @@ require_once dirname(__FILE__).'/../utils/Database.php';
         public function readAll()
 		{
             // $offset = ($currentPage - 1) * $patientPerPage;
-            $usersList_sql = 'SELECT `users_id`,`lastname`, `firstname`,TIMESTAMPDIFF(year,birthdate,CURRENT_DATE) AS age, `pseudo` FROM `users` ORDER BY `lastname` ASC';
+            $usersList_sql = 'SELECT `users_id`,`lastname`,`zipCode`,`civility`, `firstname`,TIMESTAMPDIFF(year,birthdate,CURRENT_DATE) AS age, `pseudo` FROM `users` ORDER BY `lastname` ASC';
             $usersStatement = $this->db->prepare($usersList_sql);
             $usersList = [];
             if ($usersStatement->execute()) {

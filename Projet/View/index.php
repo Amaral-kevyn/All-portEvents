@@ -63,7 +63,7 @@
         </div>
         <!--carte course à pied-->
         <div class="foot rose col-12 col-md-4 my-5">
-            <a id="footR" href="Course_à_pied">
+            <a id="footR" href="Course_a_pied">
                 <div class="card roseBorder">
                     <img class="card-img-top roseBackground roseBorderBottom" src="../assets/img/CardHome/foot.jpg"
                         alt="Monkey face" style="width: 100%; height: auto;">
@@ -72,15 +72,15 @@
             </a>
             <div class="row text-left mt-3">
                 <div class="footA col-12 p-2 mb-2 ml-2 h5">
-                    <a href="Course_à_pied#footBalade" id="footBalade" class="rose">- Balade</a>
+                    <a href="Course_a_pied#footBalade" id="footBalade" class="rose">- Balade</a>
                     <!--lien catégorie carte -->
                 </div>
                 <div class="footA col-12 p-2 mb-2 ml-2 h5">
-                    <a href="Course_à_pied#footTrails" id="footTrails" class="rose">- Trails</a>
+                    <a href="Course_a_pied#footTrails" id="footTrails" class="rose">- Trails</a>
                     <!--lien catégorie carte -->
                 </div>
                 <div class="footA col-12 p-2 mb-2 ml-2 h5">
-                    <a href="Course_à_pied#footCourse" id="footRace" class="rose">- Course</a>
+                    <a href="Course_a_pied#footCourse" id="footRace" class="rose">- Course</a>
                     <!--lien catégorie carte -->
                 </div>
             </div>

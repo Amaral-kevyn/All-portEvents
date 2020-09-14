@@ -1,61 +1,78 @@
+<?php 
+if(isset($userCreated)):?>
+<div class="alert alert-success success h1 text-center mt-3 mb-3" role="alert">
+    <p>Votre compte a été créé avec succès !!!</p>
+</div>
+<!-- <div class="alert alert-success text-center" role alert>
+    Votre compte a été créé avec succès <i class="far fa-grin-alt"></i>!!!
+</div> -->
+<?php endif;
+     if ($isSubmitted && count($errors) > 0): ?>
+<div class="alert alert-danger rouge h1 text-center mt-3 mb-3" role="alert">
+    <p>Inscription Invalide ,Veuillez vérifier le formulaire ! </p>
+</div>
+<?php endif; ?>
 
-<div class="container conuser">
-    <div class="col-md-10">
-        <div class="row justify-content-center">
-            <div class="col-12 text-center mt-5">
-                <a href='../Inscription/Connexion#inscriptionID' class="inscript placementInscription h1 text-white ">Inscription</a>
-            </div>
-        </div>
-        <form id='inscriptionID' class='formIn d-none' method="post" action="">
+<div id='inscriptionID' class="container-fluid conuser">
+    <div class="col-md-10 m-auto">
+        <form class='formIn m-auto' method="post" action="">
             <div class="row text-center justify-content-center mt-1 text-white">
-                <div class="col-12 text-white p-3 ">
+                <div class="col-12 text-white p-3 mt-5 mb-5">
+                    <legend class='mb-5 h2 montserrat'>Inscription</legend>
                     <div class="form-group">
-                        <label for="civility">Civilité</label>
+                        <label for="civility" class='montserrat'>Civilité</label>
                         <select name="civility"
-                            class="form-control <?=$isSubmitted && isset($errors['civility']) ? 'is-invalid' : ''?>" id="
+                            class="form-control w-75 m-auto  <?=$isSubmitted && isset($errors['civility']) ? 'is-invalid' : ''?>" id="
                         civility">
-                            <option>Sélectionner votre civilité</option>
+                            <option>Sélectionner votre civilité :</option>
                             <option <?=$civility == 1 ? 'selected' : ''?> value="1">Monsieur</option>
                             <option <?=$civility == 2 ? 'selected' : ''?> value="2">Madame</option>
                         </select>
-                        <div class="invalid-feedback"><?=$errors['civility'] ?? ""?></div>
+                        <div class="invalid-feedback bg-danger w-50 text-white m-auto bg-danger w-50 text-white m-auto"><?=$errors['civility'] ?? ""?></div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="lastname">Nom</label>
-                        <input class="form-control <?=$isSubmitted && isset($errors['lastname']) ? 'is-invalid' : ''?>"
+                        <label class="control-label montserrat" for="lastname">Nom :</label>
+                        <input class="form-control w-75 m-auto <?=$isSubmitted && isset($errors['lastname']) ? 'is-invalid' : ''?>"
                             value="<?=$lastname?>" id="lastname" name="lastname" type="text" placeholder="Lauper">
-                        <div class="invalid-feedback"><?=$errors['lastname'] ?? ""?></div>
+                        <div class="invalid-feedback bg-danger w-50 text-white m-auto"><?=$errors['lastname'] ?? ""?></div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="firstname">Prénom</label>
-                        <input class="form-control <?=$isSubmitted && isset($errors['firstname']) ? 'is-invalid' : ''?>"
+                        <label class="control-label montserrat" for="firstname">Prénom :</label>
+                        <input class="form-control w-75 m-auto <?=$isSubmitted && isset($errors['firstname']) ? 'is-invalid' : ''?>"
                             value="<?=$firstname?>" id="firstname" type="text" name="firstname" placeholder="Dave">
-                        <div class="invalid-feedback"><?=$errors['firstname'] ?? ""?></div>
+                        <div class="invalid-feedback bg-danger w-50 text-white m-auto"><?=$errors['firstname'] ?? ""?></div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="birthdate">Date de naissance</label>
-                        <input class="form-control <?=$isSubmitted && isset($errors['birthdate']) ? 'is-invalid' : ''?>"
+                        <label class="control-label montserrat" for="birthdate">Date de naissance :</label>
+                        <input class="form-control w-75 m-auto  <?=$isSubmitted && isset($errors['birthdate']) ? 'is-invalid' : ''?>"
                             value="<?=$birthdate?>" id="birthdate" type="date" name="birthdate" placeholder="Dave">
-                        <div class="invalid-feedback"><?=$errors['birthdate'] ?? ""?></div>
+                        <div class="invalid-feedback bg-danger w-50 text-white m-auto"><?=$errors['birthdate'] ?? ""?></div>
                     </div>
                     <div class="form-group has-success">
-                        <label class="form-control-label " for="email">Email</label>
+                        <label class="form-control-label montserrat" for="zipCode">Code Postale :</label>
+                        <input type="text" value="<?=$zipCode?>" name="zipCode"
+                            class="form-control w-75 m-auto  <?=$isSubmitted && isset($errors['zipCode']) ? 'is-invalid' : ''?>"
+                            id=" zipCode" placeholder='ak.manon@gmail.com'>
+                        <div class="invalid-feedback bg-danger w-50 text-white m-auto"><?=$errors['zipCode'] ?? ""?></div>
+                    </div>
+                    <div class="form-group has-success">
+                        <label class="form-control-label montserrat" for="email">Email :</label>
                         <input type="email" value="<?=$email?>" name="email"
-                            class="form-control <?=$isSubmitted && isset($errors['email']) ? 'is-invalid' : ''?>"
+                            class="form-control w-75 m-auto  <?=$isSubmitted && isset($errors['email']) ? 'is-invalid' : ''?>"
                             id=" email" placeholder='ak.manon@gmail.com'>
-                        <div class="invalid-feedback"><?=$errors['email'] ?? ""?></div>
+                        <div class="invalid-feedback bg-danger w-50 text-white m-auto bg-danger w-50 text-white m-auto"><?=$errors['email'] ?? ""?></div>
                     </div>
                     <div class="form-group mt-3 text-white">
-                        <label class="control-label" for="login">Pseudo</label>
-                        <input class="form-control <?=$isSubmitted && isset($errors['login']) ? 'is-invalid' : ''?>"
-                            value="<?=$login?>" id="login" name="login" type="text" placeholder="Dave3452">
-                        <div class="invalid-feedback"><?=$errors['login'] ?? ""?></div>
+                        <label class="control-label montserrat" for="pseudo">Pseudo :</label>
+                        <input class="form-control w-75 m-auto  <?=$isSubmitted && isset($errors['pseudo']) ? 'is-invalid' : ''?>"
+                            value="<?=$pseudo?>" id="pseudo" name="pseudo" type="text" placeholder="Dave3452">
+                        <div class="invalid-feedback bg-danger w-50 text-white m-auto"><?=$errors['pseudo'] ?? ""?></div>
                     </div>
 
                     <div class="form-group has-danger">
-                        <label class="form-control-label" for="password">Mot de passe</label>
+                        <label class="form-control-label montserrat" for="password">Mot de passe :</label>
                         <input type="password" value="<?=$password?>"
-                            class="form-control <?=$isSubmitted && isset($errors['password']) ? 'is-invalid' : ''?>"
+                            class="form-control w-75 m-auto  <?=$isSubmitted && isset($errors['password']) ? 'is-invalid' : ''?>"
                             name="password" id="password">
                             
                             <div id="forcePassword">
@@ -64,24 +81,24 @@
 								</div>
 								<div id="force" class="small text-white">faible</div>
 							</div>
-                        <div class="invalid-feedback"><?=$errors['password'] ?? ""?></div>
+                        <div class="invalid-feedback bg-danger w-50 text-white m-auto"><?=$errors['password'] ?? ""?></div>
                     </div>
 
                     <div class="form-group has-danger">
-                        <label class="form-control-label" for="verifPassword">Verification Mot de passe</label>
+                        <label class="form-control-label montserrat" for="verifPassword">Verification Mot de passe :</label>
                         <input type="password" value="<?=$verifPassword?>"
-                            class="form-control <?=$isSubmitted && isset($errors['verifPassword']) ? 'is-invalid' : ''?>"
+                            class="form-control w-75 m-auto  <?=$isSubmitted && isset($errors['verifPassword']) ? 'is-invalid' : ''?>"
                             name="verifPassword" id="verifPassword">
-                        <div class="invalid-feedback"><?=$errors['verifPassword'] ?? ""?></div>
+                        <div class="invalid-feedback bg-danger w-50 text-white m-auto"><?=$errors['verifPassword'] ?? ""?></div>
                     </div>
                     <div class="row  justify-content-around">
                 <div class="form-check">
                     <input class="form-check-input" name="cgu" type="checkbox" value="cgu" id="cgu">
-                    <label class="form-check-label font-weight-bold" for="cgu">
+                    <label class="form-check-label font-weight-bold w-75 m-auto " for="cgu">
                         En soumettant ce formulaire, j'autorise que les informations saisies dans ce formulaire soient
                         utilisées pour permettre de me reconnecter ultérieurement.
                     </label>
-                    <p class="error text-danger"><?= $errors['cgu'] ?? '' ?></p>
+                    <p class="error text-white bg-danger w-50 m-auto mb-5"><?= $errors['cgu'] ?? '' ?></p>
                 </div>
             </div>
                     <div class="text-center"> <button type="submit" class="btn btn-warning " name='inscription'>Envoyer!</button></div>
@@ -101,28 +118,6 @@
 
 <script type='text/javascript'>
     
-    let inscript = document.querySelector('.inscript');
-    let formInscription = document.querySelector('.formIn')
-    let connected = document.querySelector('.connected');
-    let formConnected = document.querySelector('.formConnexion')
-    let imgProfile = document.querySelector('.imgProfile')
-
-    inscript.addEventListener('click', function () {
-        formInscription.classList.toggle("d-none");
-        inscript.classList.toggle("placementInscription");
-    });
-
-    connected.addEventListener('click', function () {
-        formConnected.classList.toggle("d-none");
-        imgProfile.classList.toggle("d-none");
-        connected.classList.toggle("placementConnected");
-    });
- 
-     if (window.matchMedia("(max-width: 600px)").matches) {
-        connected.classList.toggle("placementConnected");
-        inscript.classList.toggle("placementInscription");
-} 
-
 
 		/* $("input[name='password']").focus(function(){
 			$("#forcePassword").slideDown();
