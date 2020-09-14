@@ -1,0 +1,242 @@
+/*general*/
+* {
+    box-sizing: border-box;
+    
+}
+
+h1 ,h5,h4 a, h5 a{
+    font-family: 'Indie Flower';
+    color: rgb(255, 140, 8);
+}
+
+li{
+  text-decoration: none;
+  list-style-type: none;
+}
+
+h2,h3,.card{
+  font-family: 'Indie Flower';
+}
+
+h6{
+  font-size: 2em;
+}
+
+html , body{
+    max-width: 100vw;
+    overflow-x: hidden;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    background-color: rgba(3, 0, 0, 0.959);
+}
+
+/* .contenair-fluid img{
+    margin-bottom: 2em;
+} */
+/*background Page*/
+.contenair-fluid{
+background: rgb(67, 68, 68) url('../img/backgroundHome Page/AHHHH (1).svg'); 
+background-size: contain; 
+}
+
+.contenair-fluidBike{
+  background: purple url('../img/essaie/bike.svg'); 
+  background-size: contain;
+}
+.contenair-fluidMoto{
+  background: rgba(243, 0, 0,0.5) url('../img/essaie/moto.svg'); 
+  background-size: contain;
+}
+.contenair-fluidRoller{
+  background: rgba(230, 159, 6,0.5) url('../img/essaie/roller.svg'); 
+  background-size: contain;
+}
+.contenair-fluidSkate{
+  background: white url('../img/essaie/skate.svg'); 
+  background-size: contain;
+}
+.contenair-fluidFoot{
+  background: rgb(255, 0, 128) url('../img/essaie/foot.svg'); 
+  background-size: contain;
+}
+.contenair-fluidFootball{
+  background: rgb(9, 255, 0) url('../img/essaie/football.svg'); 
+  background-size: contain;
+}
+.contenair-fluidTennis{
+  background: yellow url('../img/essaie/tennis.svg'); 
+  background-size: contain;
+}
+
+.FondHome{
+  background-image: url("../../assets/img/tornade.jpg");
+  background-repeat: no-repeat;
+  border-radius: 5%;
+}
+
+.backNav{
+  background: rgb(67, 68, 68) url('../img/backgroundHome Page/AHHHH (1).svg'); 
+background-size: contain;
+}
+/*panneau lateral*/
+
+
+
+nav{
+  background-image: url("../img/bois.jpg");
+}
+
+.backNav{
+  background-image: url("../img/bois.jpg");
+}
+
+footer{
+  background-image: url("../img/bois.jpg");
+}
+nav a h6:hover{
+  border-style: inset none inset none; 
+  border-color: rgb(219, 216, 214);
+  border-radius:20%;
+}
+nav ul li a:hover{
+  border-style: none none inset groove;
+  border-color: rgb(255, 140, 8);
+  border-radius:50%;
+}
+
+
+.card{ 
+  width: 15em;
+  height: 20em;
+}
+
+
+
+/*background Page*/
+
+/*survol*/
+a:link{
+  text-decoration: none;
+}
+
+footer a:hover{
+  color:greenyellow;
+}
+
+a:hover{
+  color: greenyellow;
+}
+
+h5:hover{
+  color: greenyellow;
+}
+
+h6:hover{
+  color: rgb(117, 148, 151);
+}
+/*survol*/
+
+/*card*/
+.card{
+  width: 20em;
+  height: 30em;
+  margin: auto;
+  background-color: black;
+}
+
+.card:hover{
+  transform: scale(1);
+  animation: pulse 4s infinite;
+}
+
+.card-body{
+  background-image: url("../../assets/img/backgroundHome Page/text2.jpg");
+  background-repeat: no-repeat;
+}
+/*animation card*/
+@keyframes pulse {
+	0% {
+		transform: scale(0.95);
+		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+	}
+
+	70% {
+		transform: scale(1);
+		box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+	}
+
+	100% {
+		transform: scale(0.95);
+		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+	}
+}
+/*animation card*/
+
+/*Navbar*/
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    text-align:center;
+    
+  }
+  
+  .sidenav a {
+    padding: 70px 8px 10px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  
+  }
+  
+  .sidenav a:hover{
+    color: rgb(255, 140, 8);
+  }
+  
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  @media screen and (max-height: 550px) {
+    .sidenav {padding-top: 0.5em;}
+    .sidenav a {font-size: 0.5em;}
+    .card{ width: 15em;
+      height: 25em;}
+    nav ul li a:hover{
+        border-radius:20%;
+      }
+      nav a h6{
+        font-size:1.8em;
+      }
+  }
+  
+  
+  .font{
+    font-family: 'Indie Flower';
+  }
+  .nav{
+  position: fixed;
+  z-index: 1;
+  font-family: 'Indie Flower';
+  }
+
+  .nav:hover{
+    color: greenyellow;
+  }
+
+  /*Image profil*/

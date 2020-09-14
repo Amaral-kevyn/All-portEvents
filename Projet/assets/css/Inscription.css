@@ -1,0 +1,50 @@
+ .conuser{
+    background-image: url('../img/star-sky.jpg'); 
+    background-size: cover; 
+    width: auto;
+    }
+
+    .placementConnected{
+        margin-top:5em;
+        margin-left:4em;
+        display:flex;
+    }
+    .placementInscription{
+        margin-top:7em;
+        margin-bottom: 5em;
+        margin-left:4em;
+        display:flex;
+    }
+
+
+    .force-progress{
+    height: 10px;
+    background-color: #e9ecef;
+    overflow: hidden;
+    }
+
+    .force-progress .p-bar{
+    width: 0;
+    height: 100%;
+    transition: width ease-in-out 1s;
+    }
+
+    #forcePassword{
+    display: none;
+    margin-top: 1.2rem;
+    }
+
+    @media screen and (max-width:600px){
+        .placementConnected{
+        margin-top:0em;
+        margin-left:1em;
+        display:flex;
+    }
+        .placementInscription{
+        margin-top:0em;
+        margin-left:2em;
+        display:flex;
+    } 
+    }
+
+    

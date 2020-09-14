@@ -1,0 +1,126 @@
+/*Couleur Carte*/
+
+/*jaune*/
+.jaune{
+    color: yellow;
+  }
+  
+  .jauneBackground{
+    background-color: yellow;
+  }
+  
+  .jauneBorder{
+    border-color: yellow;
+  }
+  
+  .jauneBorderBottom{
+    border-bottom: 1px solid yellow;
+  }
+  /*jaune*/
+  
+  /*blanc*/
+  .blanc{
+    color: white;
+  }
+  
+  .blancBackground{
+    background-color: white;;
+  }
+  
+  .blancBorder{
+    border-color: white;
+  }
+  
+  .blancBorderBottom{
+    border-bottom: 1px solid white;
+  }
+  /*Gris*/
+
+  /*orange*/
+  .orange{
+    color: rgb(230, 159, 6);
+  }
+  
+  .orangeBackground{
+    background-color: rgb(230, 159, 6);
+  }
+  
+  .orangeBorder{
+    border-color: rgb(230, 159, 6);
+  }
+  
+  .orangeBorderBottom{
+    border-bottom: 1px solid rgb(230, 159, 6);
+  }
+  /*orange*/
+  
+  /*vert*/
+  .vert{
+    color: rgb(9, 255, 0);
+  }
+  
+  .vertBackground{
+    background-color: rgb(9, 255, 0);
+  }
+  
+  .vertBorder{
+    border-color: rgb(9, 255, 0);
+  }
+  
+  .vertBorderBottom{
+    border-bottom: 1px solid rgb(9, 255, 0);
+  }
+  /*vert*/
+  /*violet*/
+  .violet{
+    color: rgb(209, 5, 209);
+  }
+  
+  .violetBackground{
+    background-color: rgb(209, 5, 209);
+  }
+  
+  .violetBorder{
+    border-color: rgb(209, 5, 209);
+  }
+  
+  .violetBorderBottom{
+    border-bottom: 1px solid rgb(209, 5, 209);
+  }
+  /*violet*/
+  /*rouge*/
+  .rouge{
+    color: rgb(255, 0, 0);
+  }
+  
+  .rougeBackground{
+    background-color: rgb(255, 0, 0);
+  }
+  
+  .rougeBorder{
+    border-color: rgb(255, 0, 0);
+  }
+  
+  .rougeBorderBottom{
+    border-bottom: 1px solid rgb(255, 0, 0);
+  }
+  /*rouge*/
+  /*rose*/
+  .rose{
+    color: rgb(255, 0, 128);
+  }
+  
+  .roseBackground{
+    background-color: rgb(255, 0, 128);
+  }
+  
+  .roseBorder{
+    border-color: rgb(255, 0, 128);
+  }
+  
+  .roseBorderBottom{
+    border-bottom: 1px solid rgb(255, 0, 128);
+  }
+  /*rouge*/
+  
+  /*card*/

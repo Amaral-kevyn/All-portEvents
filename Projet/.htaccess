@@ -1,0 +1,12 @@
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^Accueil$ Controller/index_ctrl.php [NC,L]
+RewriteRule ^Motorcycle$ Controller/CatMotocycle_ctrl.php [NC,L]
+RewriteRule ^Velo$ Controller/CatBike_ctrl.php [NC,L]
+RewriteRule ^Course_à_pied$ Controller/CatFoot_ctrl.php [NC,L]
+RewriteRule ^Football$ Controller/CatFootball_ctrl.php [NC,L]
+RewriteRule ^Roller$ Controller/CatRoller_ctrl.php [NC,L]
+RewriteRule ^Skate$ Controller/CatSkate_ctrl.php [NC,L]
+RewriteRule ^Tennis$ Controller/CatTennis_ctrl.php [NC,L]
+
