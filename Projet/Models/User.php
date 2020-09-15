@@ -82,7 +82,7 @@ require_once dirname(__FILE__).'/../utils/Database.php';
         public function readSingle()
 		{
 			// :nomDeVariable pour les données en attentes
-			$sql_viewUsers = 'SELECT `users_id`, `lastname`, `firstname`,DATE_FORMAT(`birthdate`,"%d/%m/%Y") AS birthdate_format,`birthdate`,`email`,`pseudo`,`civility`,`admin_id`,`civility`,`dateOfCreation`,`zipCode` FROM `users` WHERE `users_id` = :users_id';
+			$sql_viewUsers = 'SELECT `users_id`,`photo`,`lastname`, `firstname`,DATE_FORMAT(`birthdate`,"%d/%m/%Y") AS birthdate_format,`birthdate`,`email`,`pseudo`,`civility`,`admin_id`,`civility`,`dateOfCreation`,`zipCode` FROM `users` WHERE `users_id` = :users_id';
             $usersStatement = $this->db->prepare($sql_viewUsers);
             $usersStatement->bindValue(':users_id', $this->users_id,PDO::PARAM_INT);
 			$usersView = null;
@@ -128,7 +128,7 @@ require_once dirname(__FILE__).'/../utils/Database.php';
         }
         public function update()
         {
-            $sqlUpdate = 'UPDATE users SET lastname=:lastname,firstname=:firstname,birthdate=:birthdate,email=:email,pseudo=:pseudo WHERE users_id=:users_id';
+            $sqlUpdate = 'UPDATE users SET lastname=:lastname,firstname=:firstname,photo=:photo,birthdate=:birthdate,email=:email,pseudo=:pseudo,civility=:civility,zipCode=:zipCode WHERE users_id=:users_id';
             $usersStatement = $this->db->prepare($sqlUpdate );
             $usersStatement->bindValue(':users_id', $this->users_id,PDO::PARAM_INT);
             $usersStatement->bindValue(':lastname', $this->lastname,PDO::PARAM_STR);
@@ -137,6 +137,9 @@ require_once dirname(__FILE__).'/../utils/Database.php';
             $usersStatement->bindvalue(':birthdate',$this->birthdate,PDO::PARAM_STR);
             $usersStatement->bindvalue(':email',$this->email,PDO::PARAM_STR);
             $usersStatement->bindvalue(':pseudo',$this->pseudo,PDO::PARAM_STR);
+            $usersStatement->bindvalue(':zipCode',$this->zipCode,PDO::PARAM_INT);
+            $usersStatement->bindvalue(':civility',$this->civility,PDO::PARAM_STR);
+            $usersStatement->bindvalue(':photo',$this->photo,PDO::PARAM_STR);
 
             return $usersStatement->execute();
         }

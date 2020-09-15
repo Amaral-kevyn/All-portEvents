@@ -6,14 +6,14 @@
                     
                 </div>
                 <div class="col-12">
-                    <h3 id='bikeBalade' class='text-left text-white h1'>Balade</h3>
+                    <h3 id='bikeBalade' class='text-left text-white h1' style='border-left: 1rem solid;'>Balade</h3>
                         
                 </div>
                 <div class="col-12">
-                    <h3 id='bikeCross' class='text-center text-white h1'>Cross</h3>
+                    <h3 id='bikeCross' class='text-center text-white h1' style='border-left: 1rem solid;'>Cross</h3>
                 </div>
                 <div class="col-12">
-                    <h3 id='bikeFreestyle' class='text-right text-white h1'>Freestyle</h3>
+                    <h3 id='bikeFreestyle' class='text-right text-white h1' style='border-left: 1rem solid;'>Freestyle</h3>
                 </div>
             </div>
         </div>

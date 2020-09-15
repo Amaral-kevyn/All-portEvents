@@ -2,9 +2,9 @@
 <div class="row justify-content-center">
         <form class='formConnexion col-10 col-md-5 text-center mb-5 mt-4' method='POST' action=''>
 
-            <legend id='loginPlacement' class='text-white Montserrat h2'>Connexion</legend>
+            <legend id='loginPlacement' class='text-white Montserrat h2' style='border-bottom: 1rem groove;'>Connexion</legend>
                 <div class=" w-100">
-                    <img class="img-fluid rounded mt-5 text-center" width='200em' src="../assets/img/<?=$photo?>" alt="<?=$photo?>">
+                    <img class="img-fluid rounded mt-5 text-center" width='200em' src="<?=$photo?> ?? 'avatar.jpg" alt="<?=$photo?>">
 
                 <div class="form-group mt-3 text-white text-center">
                     <label class="control-label Montserrat" for="email">Email :</label>

@@ -142,12 +142,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['inscription'])) {
             var_dump($users);
             if ($users->create()) {
                 $userCreated = true;
+                
             }
         }
             
 
 }
 require_once dirname(__FILE__).'/../Controller/header_ctrl.php';
-require_once dirname(__FILE__).'/../View/navbar.php';
+require_once dirname(__FILE__).'/../Controller/navbar_ctrl.php';
 require_once dirname(__FILE__).'/../View/navbarBottom.php';
 require_once dirname(__FILE__).'/../View/subscribe.php';

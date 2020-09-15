@@ -5,14 +5,14 @@
             <h2>Choisit le style d'evenement que tu veux faire</h2>
           </div>
           <div class="col-12">
-                    <h3 id='motoBalade' class='text-left text-white h1'>Balade</h3>
+                    <h3 id='motoBalade' class='text-left text-white h1' style='border-bottom: 1rem solid;'>Balade</h3>
                         
                 </div>
                 <div class="col-12">
-                    <h3 id='motoCircuit' class='text-center text-white h1'>Circuit</h3>
+                    <h3 id='motoCircuit' class='text-center text-white h1'style='border-bottom: 1rem solid;'>Circuit</h3>
                 </div>
                 <div class="col-12">
-                    <h3 id='motoEnduro' class='text-right text-white h1'>Enduro</h3>
+                    <h3 id='motoEnduro' class='text-right text-white h1'style='border-bottom: 1rem solid;'>Enduro</h3>
                 </div>
         </div>
       </div>

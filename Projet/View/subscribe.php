@@ -18,7 +18,7 @@ if(isset($userCreated)):?>
         <form class='formIn m-auto' method="post" action="">
             <div class="row text-center justify-content-center mt-1 text-white">
                 <div class="col-12 text-white p-3 mt-5 mb-5">
-                    <legend class='mb-5 h2 montserrat'>Inscription</legend>
+                    <legend class='mb-5 mt-3 h1 montserrat' style='border-bottom: 1rem groove;'>Inscription</legend>
                     <div class="form-group">
                         <label for="civility" class='montserrat'>Civilité</label>
                         <select name="civility"

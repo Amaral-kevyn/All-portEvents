@@ -41,8 +41,8 @@
 						} ?></span>
                     </p>
 
-                    <a class="btn btn-warning montserrat text-white col-12 mb-2 "
-                        href="../Controllers/userAdminUpdate_ctrl.php?user_id=<?= $_SESSION['user']['users_id']; ?>">Modifier
+                    <a class="btn btn-warning montserrat text-white col-12 mb-2"
+                        href="../Controller/modifyUsers_ctrl.php?users_id=<?= $_SESSION['user']['users_id']; ?>">Modifier
                         mon profil</a>
                    
 				</div>

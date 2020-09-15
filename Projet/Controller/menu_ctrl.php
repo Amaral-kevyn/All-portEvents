@@ -1,7 +1,11 @@
 <?php 
 session_start();
 
+if (!isset($_SESSION['user'])) {
+    header('location:../Controller/login_ctrl.php#loginPlacement'); 
+}
+
 require_once dirname(__FILE__).'/../Controller/header_ctrl.php';
-require_once dirname(__FILE__).'/../View/navbar.php';
+require_once dirname(__FILE__).'/../Controller/navbar_ctrl.php';
 require_once dirname(__FILE__).'/../View/navbarBottom.php';
 require_once dirname(__FILE__).'/../View/menu.php';

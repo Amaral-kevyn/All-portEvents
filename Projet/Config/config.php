@@ -35,3 +35,15 @@ define('DB_NAME', 'allsportevents');
  * mysql error                                                 *
  ==============================================================*/
 define('ERR', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+/** 
+ * taille max d'un fichier 
+*/
+define('MAXFILESIZE', 2097152);
+/** 
+ * extension autoriser
+*/
+define('AUTHORIZED_EXTENSIONS', array("jpg", "png", "gif", "jpeg"));
+/**
+ * Dossier de destination 
+ */
+define('PICT_FOLDER','/uploads/');

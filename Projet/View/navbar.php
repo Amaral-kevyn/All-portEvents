@@ -62,10 +62,14 @@
 </div>
   <div class='imgProfilePc text-center'>
     <?php
-  if (isset($_SESSION['user'])) { ?>
-    <img class="img-fluid ml-2" style="border-radius:50%;" width='40em' src="../assets/img/<?=$photo?>" alt="<?=$photo?>">
-    <p>
-      <span class="h5 ml-2"
+        if (isset($_SESSION['user']['users_id']) && ($usersViews->photo != '')): ?>
+          <img class="img-fluid" style="border-radius:50%;" width='50em' src="<?= $photo ?>" alt="profile picture">
+        <?php else: ?>
+            <img class="img-fluid" style="border-radius:50%;" width='50em' src="../assets/img/avatar.jpg" alt="Avatar par default">
+        <?php endif; 
+
+    if (isset($_SESSION['user']['users_id'])){ ?>
+      <p><span class="h5 ml-2"
         style=" color: rgb(255, 140, 8);"><?= /* Première lettre en MAJ */ substr($_SESSION['user']['pseudo'],0,6).'**'?></span>
     </p>
     <?php
