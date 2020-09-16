@@ -8,7 +8,7 @@
 
                 <div class="form-group mt-3 text-white text-center">
                     <label class="control-label Montserrat" for="email">Email :</label>
-                    <input class="form-control w-100 <?= $email ? 'is-invalid' : ''?>" value="<?=$email?>" id="email" name="email" type="text" placeholder="Dave3452">
+                    <input class="form-control w-100 <?=$isSubmitted && isset($errors['email']) ? 'is-invalid' : ''?>" value="<?=$email?>" id="email" name="email" type="text" placeholder="Dave3452">
                         <div class="text-white bg-danger w-75 m-auto"><?=$errors['email'] ?? ""?>
                         </div>
                 </div>

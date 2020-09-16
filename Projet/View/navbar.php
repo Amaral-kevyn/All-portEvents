@@ -48,30 +48,30 @@
   // affiche le lien de connexion si la session est absente
   if (!isset($_SESSION['user'])) {
 ?>
-    <a class="btn btn-outline-success text-success font-weight-bold ml-2 mr-2" data-toggle="tooltip" title='Se Connecter' href="../Connexion#loginPlacement"><img src="../assets/img/login.svg" style='width:2em;border-radius:50%;' class="img-fluid bg-success " alt="connexion"></a>
+    <a class="btn btn-outline-success text-success font-weight-bold mr-2" data-toggle="tooltip" title='Se Connecter' href="../Connexion#loginPlacement"><img src="../assets/img/login.svg" style='width:2em;border-radius:50%;' class="img-fluid bg-success " alt="connexion"></a>
 <?php
   }
   // sinon affiche le bouton de deconnexion
   else{
 ?>
     <!-- le $_GET logout sert à déclencher la deconnexion -->
-    <a class="btn btn-outline-danger text-danger font-weight-bold mb-3 ml-2 mr-2" data-toggle="tooltip" title='Se Déconnecter' href="../Connexion?logout=true"><img src="../assets/img/login.svg" style='width:2em;border-radius:50%;' class="img-fluid bg-danger" alt="deconnexion"></a>
+    <a class="btn btn-outline-danger text-danger font-weight-bold mr-2" data-toggle="tooltip" title='Se Déconnecter' href="../Connexion?logout=true"><img src="../assets/img/login.svg" style='width:2em;border-radius:50%;' class="img-fluid bg-danger" alt="deconnexion"></a>
 <?php
   }
 ?>
 </div>
   <div class='imgProfilePc text-center'>
     <?php
-        if (isset($_SESSION['user']['users_id']) && ($usersViews->photo != '')): ?>
-          <img class="img-fluid" style="border-radius:50%;" width='50em' src="<?= $photo ?>" alt="profile picture">
+        if (isset($_SESSION['user']) && ($usersViews->photo != '')): ?>
+          <img class="img-fluid p-1" style="width:4em;border-radius:50%;" src="<?= $photo ?>" alt="profile picture">
         <?php else: ?>
-            <img class="img-fluid" style="border-radius:50%;" width='50em' src="../assets/img/avatar.jpg" alt="Avatar par default">
+            <img class="img-fluid p-1" style="width:4em;border-radius:50%;" src="../assets/img/avatar.jpg" alt="Avatar par default">
         <?php endif; 
 
     if (isset($_SESSION['user']['users_id'])){ ?>
-      <p><span class="h5 ml-2"
+      <span class="montserrat text-capitalize p-1"
         style=" color: rgb(255, 140, 8);"><?= /* Première lettre en MAJ */ substr($_SESSION['user']['pseudo'],0,6).'**'?></span>
-    </p>
+    
     <?php
   }
 ?>

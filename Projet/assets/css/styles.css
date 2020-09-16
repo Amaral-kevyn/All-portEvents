@@ -150,7 +150,9 @@ h6:hover{
   color: rgb(117, 148, 151);
 }
 /*survol*/
-
+.basse a{
+  font-size: 1em;
+}
 /*card*/
 .card{
   width: 20em;

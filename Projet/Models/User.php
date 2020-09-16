@@ -116,7 +116,7 @@ require_once dirname(__FILE__).'/../utils/Database.php';
         public function readAll()
 		{
             // $offset = ($currentPage - 1) * $patientPerPage;
-            $usersList_sql = 'SELECT `users_id`,`lastname`,`zipCode`,`civility`, `firstname`,TIMESTAMPDIFF(year,birthdate,CURRENT_DATE) AS age, `pseudo` FROM `users` ORDER BY `lastname` ASC';
+            $usersList_sql = 'SELECT `users_id`,`admin_id`,`photo`,`lastname`,`zipCode`,`civility`, `firstname`,TIMESTAMPDIFF(year,birthdate,CURRENT_DATE) AS age, `pseudo` FROM `users` ORDER BY `lastname` ASC';
             $usersStatement = $this->db->prepare($usersList_sql);
             $usersList = [];
             if ($usersStatement->execute()) {

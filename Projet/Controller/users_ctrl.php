@@ -12,9 +12,17 @@ if (!isset($_GET['users_id']) && isset($_SESSION['user'])){
 
 }
 
+if ($_SESSION['user']['admin'] == '83714'){
+    header('location:../Controller/listUsers_ctrl?users_id='.$_SESSION['user']['users_id']); 
+}
+
+
+
     $users_id = (int) $_SESSION['user']['users_id'];
     $users = new Users($users_id);
     $usersView = $users->readSingle();
+
+
 
 
 

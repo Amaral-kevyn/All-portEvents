@@ -139,7 +139,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['inscription'])) {
         }
         if ($isSubmitted && count($errors) == 0){
             $users = new Users(0,$lastname, $firstname, $birthdate, $email,$pseudo, $hashed_password,'',$zipCode,$civility,0,'','');
-            var_dump($users);
             if ($users->create()) {
                 $userCreated = true;
                 

@@ -4,7 +4,9 @@ require_once dirname(__FILE__).'/../Config/config.php';
 require_once dirname(__FILE__).'/../Utils/fonctions.php';
 $title = 'Modifier mon profil';
 
-
+if ($_SESSION['user']['admin'] == '83714'){
+    header('location:../Controller/listUsers_ctrl?users_id='.$_SESSION['user']['users_id']); 
+}
 
 
 if (empty($_GET['users_id']) && empty($_POST['users_id'])){
@@ -39,6 +41,7 @@ if (!empty($_GET['users_id']) || !empty($_POST['users_id'])) {
     $regexzipCode= '/^(?:[0-8]\d|9[0-8])\d{3}$/';
     $post=[];
     $photo ='';
+    $extension = NULL;
     
     
     //validation formulaire
@@ -229,7 +232,7 @@ if ($isSubmitted && count($errors) == 0){
     
     if ($users->update()) {
         $updateSuccess = true;
-         header('refresh:2; users_ctrl.php?users_id='.$_SESSION['user']['users_id']); 
+          header('refresh:2; users_ctrl.php?users_id='.$_SESSION['user']['users_id']);  
     }
 }  
 

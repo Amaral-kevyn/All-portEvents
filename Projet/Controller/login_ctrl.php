@@ -45,8 +45,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['connexion'])) {
                 $_SESSION['user']['users_id'] = $userCo->users_id;
                 $_SESSION['user']['email'] = $userCo->email;
                 $_SESSION['user']['pseudo'] = $userCo->pseudo; 
+                $_SESSION['user']['admin'] = $userCo->admin_id; 
                 $success =true;
-                header('location:../Controller/users_ctrl.php?users_id='.$_SESSION['user']['users_id']);
+                 header('location:../Controller/users_ctrl.php?users_id='.$_SESSION['user']['users_id']); 
             }
             else{
                 $errors['email'] = 'votre email ou votre mot de passe est incorrect!';

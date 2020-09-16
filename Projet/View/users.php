@@ -1,29 +1,34 @@
 <div class="container-fluid">
-	<div class="row justify-content-center">
-<div id='userPlace' class="cardUser col-12 mt-4 mb-4 ">
-                <div class="card-body bg-light text-center border rounded border-info noirBackground m-auto" style='width:22em;'>
-                    <img class="card-img-top p-2 w-50" src="../assets/img/avatar.jpg" style='border-radius:50%; width:2em;'
-						alt="Card image cap">
+        <div class="row justify-content-center">
+                <div id='userPlace' class="cardUser col-12 mt-4 mb-4">
+                        <div class="card-body bg-light text-center border rounded border-info noirBackground m-auto" style='width:22em;'>
+
+
+                 <?php if (isset($_SESSION['user']) && ($usersView->photo != '')) : ?>
+                         <img class="card-img-top p-2 w-50" style="width:2em;border-radius:50%;" src="<?= $photo ?>" alt="profile picture">
+                <?php else: ?>
+                         <img class="card-img-top p-2 w-50" style="width:2em;border-radius:50%;" src="../assets/img/avatar.jpg" alt="Avatar par default">
+                <?php endif; ?>
 						
-                    <p class="card-text jaune montserrat noirBackground">Utilisateur n° : <span class='text-white'>
+                        <p class="card-text jaune montserrat noirBackground">Utilisateur n° : <span class='text-white'>
                             <?= $usersView->users_id; ?></span></p>
-                    <p class="card-text orange montserrat noirBackground">Date de création du compte : <span class='text-white'>
+                        <p class="card-text orange montserrat noirBackground">Date de création du compte : <span class='text-white'>
                             <?= $usersView->dateOfCreation; ?></span></p>
-                    <p class="card-text orange montserrat noirBackground">Genre : <span class='text-white'>
-							<?php 
-							if($usersView->civility == '1'){
-								echo 'Monsieur';
-							}else{
-								echo 'Madame';
-							}?></span></p>
-                    <p class="card-text orange montserrat noirBackground ">Pseudo : <span class='text-white'>
+                        <p class="card-text orange montserrat noirBackground">Genre : <span class='text-white'>
+                <?php if($usersView->civility == '1'){
+                        echo 'Monsieur';
+                }else{
+                        echo 'Madame';
+                }?></span></p>
+
+                        <p class="card-text orange montserrat noirBackground ">Pseudo : <span class='text-white text-capitalize'>
                             <?= $usersView->pseudo; ?></span></p>
-                    <p class="card-text orange montserrat noirBackground ">Nom : <span class='text-white'>
+                        <p class="card-text orange montserrat noirBackground ">Nom : <span class='text-white text-capitalize'>
                             <?= $usersView->lastname; ?></span></p>
-                    <p class="card-text orange montserrat noirBackground ">Prénom : <span class='text-white'>
+                         <p class="card-text orange montserrat noirBackground ">Prénom : <span class='text-white text-capitalize'>
 					<?= $usersView->firstname;?> </span>
-                    </p>
-                    <p class="card-text orange montserrat noirBackground ">Date de Naissance : <span class='text-white'>
+                        </p>
+                        <p class="card-text orange montserrat noirBackground ">Date de Naissance : <span class='text-white'>
                             <?= $usersView->birthdate_format; ?></span></p>
                     <p class="card-text orange montserrat noirBackground ">Code Postal : <span class='text-white'>
                             <?= $usersView->zipCode; ?></span></p>
