@@ -2,6 +2,11 @@
 require_once dirname(__FILE__).'/../Models/user.php';
 $title = 'profil utilisateur';
 
+
+$users_id = (int) $_SESSION['user']['users_id'];
+$users = new Users($users_id);
+$usersView = $users->readSingle();
+
 if (!isset($_SESSION['user'])) {
     header('location:../Controller/login_ctrl.php#loginPlacement'); 
 }
@@ -12,15 +17,12 @@ if (!isset($_GET['users_id']) && isset($_SESSION['user'])){
 
 }
 
-if ($_SESSION['user']['admin'] == '83714'){
+ if ($_SESSION['user']['users_id'] != $usersView->users_id){
     header('location:../Controller/listUsers_ctrl?users_id='.$_SESSION['user']['users_id']); 
-}
+} 
 
 
 
-    $users_id = (int) $_SESSION['user']['users_id'];
-    $users = new Users($users_id);
-    $usersView = $users->readSingle();
 
 
 

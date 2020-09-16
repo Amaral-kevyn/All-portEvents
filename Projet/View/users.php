@@ -37,9 +37,9 @@
                     </p>
                     <p class="card-text orange montserrat noirBackground ">Role : <span class='text-white'> 
 						<?php
-						if($usersView->admin_id == '65498'){
+						if($usersView->admin_id == $utilisateur){
 								echo 'Utilisateur';
-						}elseif ($usersView->admin_id == '83714') {
+						}elseif ($usersView->admin_id == $admin) {
 								echo 'Admin';
 						}else {
 								echo 'Modérateur';

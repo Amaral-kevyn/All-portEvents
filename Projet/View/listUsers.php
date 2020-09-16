@@ -29,16 +29,16 @@
                     <p class="card-text orange montserrat noirBackground ">Code Postal :<span class='text-white'>
                             <?= $user->zipCode; ?></span></p>
 
-                        <?php if ($_SESSION['user']['admin'] == '83714'){ ?>
+                        <?php if ($_SESSION['user']['admin'] == $admin){ ?>
                     <p class="card-text orange montserrat noirBackground ">Nom : <span class='text-white text-capitalize'>
                             <?= $user->lastname; ?></span></p>
                     <p class="card-text orange montserrat noirBackground ">Prénom : <span class='text-white'>
                             <?= $user->firstname; ?></span></p>
                     <p class="card-text orange montserrat noirBackground ">Role : <span class='text-white'>
                     <?php
-						if($user->admin_id == '65498'){
+						if($user->admin_id == $utilisateur){
 								echo 'Utilisateur';
-						}elseif ($user->admin_id == '83714') {
+						}elseif ($user->admin_id == $admin) {
 								echo 'Admin';
 						}else {
 								echo 'Modérateur';
@@ -48,11 +48,8 @@
                         href="../Controller/deleteAdmin_ctrl.php?users_id=<?= $user->users_id; ?>">Supprimer
                         l'utilisateur</a>
                         <?php } ?>
-
-                        <?php if ($_SESSION['user']['admin'] == '65498'){ ?>
                             <a class="btn btn-success text-white col-12 mb-2"
                         href="../Controller/postUsers_ctrl.php?users_id=<?= $user->users_id; ?>">Voir Commentaires</a>
-                           <?php } ?>
                 </div>
             </div>
             <?php } ?>

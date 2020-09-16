@@ -13,7 +13,7 @@ require_once dirname(__FILE__).'/../Models/user.php';
         private $db;
     
 
-        public function __construct($_post_id =0,$_dateOfPost='',$_sentNamePost='',$_users_id=0,$_users_id_receive=NULL,$_events_id=NULL,$_contentPost='')
+        public function __construct($_post_id =0,$_dateOfPost='',$_sentNamePost='',$_users_id=0,$_users_id_receive=0,$_events_id=0,$_contentPost='')
         {
             
             $this->post_id = $_post_id;
@@ -47,14 +47,14 @@ require_once dirname(__FILE__).'/../Models/user.php';
 
         public function createPost()
 		{
-			$insertPost = 'INSERT INTO `post`(`post_id`,`sentNamePost`,`users_id`,`users_id_receive`,`events_id`,`contentPost`) VALUES (:post_id, :sentNamePost, :users_id, :users_id_receive, :events_id, :contentPost)';
+			$insertPost = 'INSERT INTO `post`(`post_id`,`sentNamePost`,`users_id`,`users_id_receive`,`contentPost`) VALUES (:post_id, :sentNamePost, :users_id, :users_id_receive, :contentPost)';
             $postStatement = $this->db->prepare($insertPost);
             // $postStatement->bindValue(':id_user', $this->id_user,PDO::PARAM_INT);
 			$postStatement->bindValue(':post_id', $this->post_id,PDO::PARAM_INT);
             $postStatement->bindValue(':sentNamePost', $this->sentNamePost,PDO::PARAM_STR);
             $postStatement->bindvalue(':users_id',$this->users_id,PDO::PARAM_STR);
             $postStatement->bindvalue(':users_id_receive',$this->users_id_receive,PDO::PARAM_INT);
-            $postStatement->bindvalue(':events_id',$this->events_id,PDO::PARAM_INT);
+           /*  $postStatement->bindvalue(':events_id',$this->events_id,PDO::PARAM_INT); */
             $postStatement->bindvalue(':contentPost',$this->contentPost,PDO::PARAM_STR);
 
 			return $postStatement->execute();
@@ -62,7 +62,7 @@ require_once dirname(__FILE__).'/../Models/user.php';
 
         public function readAllPost()
 		{
-            $usersPost_sql = 'SELECT post.post_id, contentPost, post.dateOfPost, post.sentNamePost, post.users_id, post.users_id_receive ,events_id FROM `post` JOIN `users` ON post.users_id = users.users_id WHERE users.users_id =:users.users_id  ORDER BY `dateOfPost` ASC';
+            $usersPost_sql = 'SELECT post.post_id, post.contentPost, post.dateOfPost, post.sentNamePost, post.users_id, post.users_id_receive FROM `post` JOIN `users` ON post.users_id = users.users_id ORDER BY `dateOfPost` DESC';
             $usersPostStatement = $this->db->prepare($usersPost_sql);
             $usersPost = [];
             if ($usersPostStatement->execute()) {
@@ -71,5 +71,26 @@ require_once dirname(__FILE__).'/../Models/user.php';
                 }
             }
             return $usersPost;
+        }
+
+        public function readPost()
+		{
+			// :nomDeVariable pour les données en attentes
+			$sql_viewPost = 'SELECT * FROM `post` WHERE `post_id` = :post_id';
+            $postStatement = $this->db->prepare($sql_viewPost );
+            $postStatement->bindValue(':post_id', $this->post_id,PDO::PARAM_INT);
+			$postView = null;
+			if ($postStatement->execute()){
+				$postView = $postStatement->fetch(PDO::FETCH_OBJ);
+			}
+			return $postView;
+        }
+
+        public function deletePost()
+        {
+            $sqlDelete = 'DELETE FROM `post` WHERE post_id = :post_id';
+            $postDelete = $this->db->prepare($sqlDelete);
+            $postDelete->bindValue(':post_id',$this->post_id,PDO::PARAM_INT);
+            return $postDelete->execute();
         }
     }

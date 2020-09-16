@@ -146,7 +146,7 @@ require_once dirname(__FILE__).'/../utils/Database.php';
         public function delete()
         {
             $sqlDelete = 'DELETE FROM `users` WHERE `users_id`=:users_id';
-            $usersDelete = $this->db->prepare($sqlDelete );
+            $usersDelete = $this->db->prepare($sqlDelete);
             $usersDelete->bindValue(':users_id', $this->users_id,PDO::PARAM_INT);
             return $usersDelete->execute();
         }

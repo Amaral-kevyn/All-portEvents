@@ -15,8 +15,8 @@ if (!isset($_GET['users_id']) && isset($_SESSION['user'])){
 
 $users_id = $_GET['users_id'];
 
-$users = new Users();
-$usersPost = $users->readAllPost();
+$post = new post();
+$usersPost = $post->readAllPost();
 
 $user = new Users($users_id);
 $usersPostInfo = $user->readSingle();
@@ -45,11 +45,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $users_id_receive = $_SESSION['user']['users_id'];
     $sentNamePost = $_SESSION['user']['pseudo'];
 
-if ($isSubmitted && count($errors) == 0) {
-    $user = new Users(0,'',$sentNamePost, $users_id, $users_id_receive,0,$contentPost);
-    if ($user->createPost()) {
-        $postCreated = true;
 
+    
+
+if ($isSubmitted && count($errors) == 0) {
+    $post = new Post(0,'',$sentNamePost, $users_id, $users_id_receive,0,$contentPost);
+    if ($post->createPost()) {
+        $postCreated = true;
+        /* header('location: PostUsers_ctrl.php?users_id='.$_SESSION['user']['users_id']);  */
     }
 }}
 

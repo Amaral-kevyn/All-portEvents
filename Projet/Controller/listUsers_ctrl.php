@@ -8,6 +8,7 @@ if (!isset($_SESSION['user'])) {
 }
 
 
+
 $users = new Users();
 $usersList = $users->readAll();
 

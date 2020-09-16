@@ -4,9 +4,9 @@ require_once dirname(__FILE__).'/../Config/config.php';
 require_once dirname(__FILE__).'/../Utils/fonctions.php';
 $title = 'Modifier mon profil';
 
-if ($_SESSION['user']['admin'] == '83714'){
+/* if ($_SESSION['user']['admin'] == '83714'){
     header('location:../Controller/listUsers_ctrl?users_id='.$_SESSION['user']['users_id']); 
-}
+} */
 
 
 if (empty($_GET['users_id']) && empty($_POST['users_id'])){
@@ -26,8 +26,12 @@ if (!empty($_GET['users_id']) || !empty($_POST['users_id'])) {
     $zipCode = $usersInfos->zipCode;
     $civility = $usersInfos->civility;
     $pseudo = $usersInfos->pseudo;
+    $photo = $usersInfos->photo;
    
 }
+ if ($_SESSION['user']['users_id'] != $usersInfos->users_id){
+    header('location:../Controller/listUsers_ctrl?users_id='.$_SESSION['user']['users_id']); 
+} 
 
 
     //validation des champs 
@@ -212,11 +216,6 @@ if (!empty($_GET['users_id']) || !empty($_POST['users_id'])) {
 
     }
 
-
-   /*  if (empty($photo)) {
-        $extension= $_POST['picture'];
-    } */
-    var_dump($isSubmitted);
     
            
 if ($isSubmitted && count($errors) == 0){
