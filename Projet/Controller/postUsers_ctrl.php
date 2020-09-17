@@ -15,7 +15,7 @@ if (!isset($_GET['users_id']) && isset($_SESSION['user'])){
 
 $users_id = $_GET['users_id'];
 
-$post = new post();
+$post = new post(0,'','',$users_id,'','','');
 $usersPost = $post->readAllPost();
 
 $user = new Users($users_id);

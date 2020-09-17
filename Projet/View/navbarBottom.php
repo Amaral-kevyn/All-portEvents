@@ -3,3 +3,4 @@
   <a class="navbar-brand montserrat" href="#!"><i class="fas fa-plus orange mr-2"></i>Organiser</a>
   <a class="navbar-brand montserrat" href="../Inscription#inscriptionID"><i class="fas fa-sign-in-alt orange mr-2"></i>Inscription</a>
 </nav>
+

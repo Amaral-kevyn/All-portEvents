@@ -3,7 +3,7 @@
             <?php if (count($usersList) > 0) { 
                 foreach ($usersList as $number => $user) { ?>
 
-            <div id='userListPlace' class="card-user-list col-4 col-sm-4 col-md-3 mt-4 mb-4">
+            <div id='userListPlace' class="card-user-list col-6 col-sm-6 col-md-3 mt-4 mb-4">
                 <div class="card-body bg-light text-center border rounded border-info">
 
                 <?php

@@ -52,7 +52,7 @@ require_once dirname(__FILE__).'/../Models/user.php';
             // $postStatement->bindValue(':id_user', $this->id_user,PDO::PARAM_INT);
 			$postStatement->bindValue(':post_id', $this->post_id,PDO::PARAM_INT);
             $postStatement->bindValue(':sentNamePost', $this->sentNamePost,PDO::PARAM_STR);
-            $postStatement->bindvalue(':users_id',$this->users_id,PDO::PARAM_STR);
+            $postStatement->bindvalue(':users_id',$this->users_id,PDO::PARAM_INT);
             $postStatement->bindvalue(':users_id_receive',$this->users_id_receive,PDO::PARAM_INT);
            /*  $postStatement->bindvalue(':events_id',$this->events_id,PDO::PARAM_INT); */
             $postStatement->bindvalue(':contentPost',$this->contentPost,PDO::PARAM_STR);
@@ -62,8 +62,9 @@ require_once dirname(__FILE__).'/../Models/user.php';
 
         public function readAllPost()
 		{
-            $usersPost_sql = 'SELECT post.post_id, post.contentPost, post.dateOfPost, post.sentNamePost, post.users_id, post.users_id_receive FROM `post` JOIN `users` ON post.users_id = users.users_id ORDER BY `dateOfPost` DESC';
+            $usersPost_sql = 'SELECT post_id, contentPost, dateOfPost, sentNamePost, users_id, users_id_receive FROM `post` WHERE users_id = :users_id ORDER BY `dateOfPost` DESC';
             $usersPostStatement = $this->db->prepare($usersPost_sql);
+            $usersPostStatement->bindvalue(':users_id',$this->users_id,PDO::PARAM_INT);
             $usersPost = [];
             if ($usersPostStatement->execute()) {
                 if ($usersPostStatement instanceof PDOstatement ) {
