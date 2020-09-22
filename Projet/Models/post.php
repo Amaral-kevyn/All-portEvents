@@ -74,6 +74,19 @@ require_once dirname(__FILE__).'/../Models/user.php';
             return $usersPost;
         }
 
+        public function readAllPostModerateur()
+		{
+            $usersPostModerateur_sql = 'SELECT post_id, contentPost, dateOfPost, sentNamePost, users_id, users_id_receive FROM `post` ORDER BY `dateOfPost` DESC';
+            $usersPostStatementModerateur = $this->db->prepare($usersPostModerateur_sql);
+            $usersPostModerateur = [];
+            if ($usersPostStatementModerateur->execute()) {
+                if ($usersPostStatementModerateur instanceof PDOstatement ) {
+                    $usersPostModerateur = $usersPostStatementModerateur->fetchAll(PDO::FETCH_OBJ);
+                }
+            }
+            return $usersPostModerateur;
+        }
+
         public function readPost()
 		{
 			// :nomDeVariable pour les données en attentes

@@ -47,9 +47,17 @@
                     <a class="btn btn-danger text-white col-12 mb-2"
                         href="../Controller/deleteAdmin_ctrl.php?users_id=<?= $user->users_id; ?>">Supprimer
                         l'utilisateur</a>
-                        <?php } ?>
+                        <?php } 
+
+                         if ($_SESSION['user']['admin'] == $admin || $_SESSION['user']['admin'] == $utilisateur ){ ?>
                             <a class="btn btn-success text-white col-12 mb-2"
                         href="../Controller/postUsers_ctrl.php?users_id=<?= $user->users_id; ?>">Voir Commentaires</a>
+                         <?php } ?>
+
+                        <?php if($_SESSION['user']['admin'] == $moderateur || $_SESSION['user']['admin'] == $admin){ ?>
+                            <a class="btn btn-primary text-white col-12 mb-2"
+                        href="../Controller/moderateur_ctrl.php?users_id=<?= $user->users_id; ?>">Espace modérateur</a>
+                        <?php } ?>
                 </div>
             </div>
             <?php } ?>

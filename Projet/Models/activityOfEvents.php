@@ -2,6 +2,8 @@
 require_once dirname(__FILE__).'/../utils/Database.php';
 require_once dirname(__FILE__).'/../Models/events.php';
 require_once dirname(__FILE__).'/../Models/typeOfEvents.php';
+require_once dirname(__FILE__).'/../Models/participate.php';
+
     class activityOfEvents
     {
         private $activityOfEvents_id;
@@ -73,6 +75,8 @@ require_once dirname(__FILE__).'/../Models/typeOfEvents.php';
 			}
 			return $postView;
         }
+
+    
 
         public function deleteActivityOfEvents()
         {

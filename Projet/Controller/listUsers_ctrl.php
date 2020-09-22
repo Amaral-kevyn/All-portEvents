@@ -3,13 +3,15 @@ session_start();
 require_once dirname(__FILE__).'/../Models/user.php';
 $title = 'liste des utilisateurs';
 
+require_once dirname(__FILE__).'/../Controller/role_ctrl.php';
+
 if (!isset($_SESSION['user'])) {
     header('location:../Controller/login_ctrl.php#loginPlacement'); 
 }
 
 
 
-$users = new Users();
+$users = new users();
 $usersList = $users->readAll();
 
 

@@ -54,6 +54,7 @@ background: rgb(67, 68, 68) url('../img/backgroundHome Page/AHHHH (1).svg');
 background-size: contain; 
 }
 
+
 .contenair-fluidBike{
   background: purple url('../img/essaie/bike.svg'); 
   background-size: contain;
@@ -84,7 +85,7 @@ background-size: contain;
 }
 
 .FondHome{
-  background-image: url("../../assets/img/tornade.jpg");
+  background-image: url("../../assets/img/foretBack.jpg");
   background-repeat: no-repeat;
   border-radius: 5%;
 }

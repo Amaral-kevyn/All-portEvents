@@ -2,6 +2,7 @@
 session_start();
 require_once dirname(__FILE__) . '/../Models/user.php';
 
+
 if (isset($_GET['logout'])) {
     // vide le tableau session
     $_SESSION['user'] = [];
@@ -29,10 +30,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['connexion'])) {
             $errors['email'] = 'Veuillez renseigner votre adresse email !';
         } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $errors['email'] = 'Le champs n\'est pas valide!';
-        }if (empty($password)) {
-            $errors['password'] = 'Merci de mettre ton mot de passe !';
+        } else {
+            $errors['email'] = 'L\'email ne correspond pas à votre profil !';
         }
-        $user = new Users();
+
+        if (empty($password)) {
+            $errors['password'] = 'Merci de mettre ton mot de passe !';
+        } else {
+            $errors['password'] = 'Le mot de passe ne correspond pas à votre profil !';
+        }
+
+        $user = new users();
         $user->email = $email;
         $user->password = $password;
 

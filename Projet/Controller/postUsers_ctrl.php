@@ -3,6 +3,12 @@ require_once dirname(__FILE__).'/../Models/user.php';
 require_once dirname(__FILE__).'/../Models/post.php';
 $title = 'profil Commentaire';
 
+require_once dirname(__FILE__).'/../Controller/role_ctrl.php';
+
+ if($_SESSION['user']['admin'] == $moderateur){
+    header('location: menu_ctrl.php?users_id='.$_SESSION['user']['admin']);
+   }  
+
 if (!isset($_SESSION['user'])) {
     header('location:../Controller/login_ctrl.php#loginPlacement'); 
 }
@@ -18,7 +24,7 @@ $users_id = $_GET['users_id'];
 $post = new post(0,'','',$users_id,'','','');
 $usersPost = $post->readAllPost();
 
-$user = new Users($users_id);
+$user = new users($users_id);
 $usersPostInfo = $user->readSingle();
 
 

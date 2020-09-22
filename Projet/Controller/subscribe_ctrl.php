@@ -4,6 +4,8 @@ session_start();
 require_once dirname(__FILE__) . '/../Models/user.php';
 $title = 'S\'incrire';
 
+require_once dirname(__FILE__).'/../Controller/role_ctrl.php';
+
 $civility=$zipCode=$emailExist = $lastname =$email= $firstname =$password=$pseudo=$password=$birthdate=$admin_id= $verifPassword = "";
 $errors = [];
 $isSubmitted = false;
@@ -138,9 +140,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['inscription'])) {
             $errors['cgu'] = 'Veuillez cocher la case pour envoyer le formulaire.';
         }
         if ($isSubmitted && count($errors) == 0){
-            $users = new Users(0,$lastname, $firstname, $birthdate, $email,$pseudo, $hashed_password,'',$zipCode,$civility,0,'','');
+            $users = new users(0,$lastname, $firstname, $birthdate, $email,$pseudo, $hashed_password,'',$zipCode,$civility,0,'','');
             if ($users->create()) {
                 $userCreated = true;
+                header('location:../Controller/login_ctrl.php#loginPlacement'); 
                 
             }
         }

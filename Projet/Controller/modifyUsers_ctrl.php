@@ -4,6 +4,12 @@ require_once dirname(__FILE__).'/../Config/config.php';
 require_once dirname(__FILE__).'/../Utils/fonctions.php';
 $title = 'Modifier mon profil';
 
+require_once dirname(__FILE__).'/../Controller/role_ctrl.php';
+
+if($_SESSION['user']['admin'] == $moderateur){
+    header('location: menu_ctrl.php?users_id='.$_SESSION['user']['admin']);
+   } 
+
 /* if ($_SESSION['user']['admin'] == '83714'){
     header('location:../Controller/listUsers_ctrl?users_id='.$_SESSION['user']['users_id']); 
 } */
@@ -16,7 +22,7 @@ if (empty($_GET['users_id']) && empty($_POST['users_id'])){
 
 if (!empty($_GET['users_id']) || !empty($_POST['users_id'])) {
     $users_id = $_POST['users_id'] ?? $_GET['users_id'];
-    $users = new Users($users_id);
+    $users = new users($users_id);
     $usersInfos = $users->readSingle();
     $users_id = $usersInfos->users_id; 
     $firstname = $usersInfos->firstname;

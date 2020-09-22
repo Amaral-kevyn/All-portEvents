@@ -2,7 +2,9 @@
 require_once dirname(__FILE__).'/../Models/user.php';
 $title = 'Supprimer un utilisateur';
 
-if($_SESSION['user']['admin'] != '83714'){
+require_once dirname(__FILE__).'/../Controller/role_ctrl.php';
+
+if($_SESSION['user']['admin'] != $admin){
     header('location: login_ctrl.php');
     exit();
 }
@@ -13,7 +15,7 @@ if (empty($_GET['users_id']) && empty($_POST['users_id'])) {
 }
 if (isset($_GET['users_id'])) {
     $users_id = (int) $_GET['users_id'];
-    $users = new Users($users_id);
+    $users = new users($users_id);
     $usersInfos = $users->readSingle();
     $fullName = $usersInfos->lastname.' '.$usersInfos->firstname;
 }
@@ -21,7 +23,7 @@ if (isset($_GET['users_id'])) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $users_id = (int) $_POST['users_id'];
     $fullName = $_POST['fullName'];
-    $users = new Users($users_id);
+    $users = new users($users_id);
         if ($users->delete()) {
             $deleteUsersSuccess = true;
             header('location: listUsers_ctrl.php');
