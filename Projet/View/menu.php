@@ -15,11 +15,11 @@
             class='btn btn-outline-secondary text-white mb-2'>Mon Profil</a>
         <a href='../Controller/listUsers_ctrl.php' class='btn btn-outline-secondary text-white mb-2'>Liste
             Utilisateurs</a>
-        <a href='#' class='btn btn-outline-secondary text-white mb-2'>Liste des événements</a>
+        <a href='../controller/listEvents_ctrl.php' class='btn btn-outline-secondary text-white mb-2'>Liste des événements</a>
         <?php }
         
         if ($_SESSION['user']['admin'] == $admin){ ?>
-        <a href='../users_ctrl.php?users_id=#userPlace' .<?=$_SESSION['user']['users_id'];?>
+        <a href='../users_ctrl.php?users_id=../controller/listEvents_ctrl.phpuserPlace' .<?=$_SESSION['user']['users_id'];?>
             class='btn btn-outline-secondary text-white mb-2'>Mon Profil</a>
         <a href='listUsers_ctrl.php' class='btn btn-outline-secondary text-white mb-2'>Liste Utilisateur</a>
         <a href='#' class='btn btn-outline-secondary text-white mb-2'>Liste des événements </a>

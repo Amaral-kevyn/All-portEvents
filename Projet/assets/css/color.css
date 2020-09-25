@@ -21,6 +21,12 @@
   .noirBackground{
     background-color: rgba(0, 0, 0, 0.63);
   }
+  .noirModal{
+    background-color: rgb(0, 0, 0);
+  }
+  .noirCard{
+    background-color: rgba(0, 0, 0, 0.842);
+  }
   .noirBackgroundEvents{
     background-color: rgba(0, 0, 0, 0.322);
   }

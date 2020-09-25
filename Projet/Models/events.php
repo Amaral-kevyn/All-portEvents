@@ -60,24 +60,24 @@ require_once dirname(__FILE__).'/../Models/villes_france.php';
 
         public function createEvents()
 		{
-			$insertEvents = 'INSERT INTO `events`(`events_id`,`location`,`budget`,`maxParticipant`,`difficulty`,`dateOfEvents`,`typeOfEvents_id`,`users_id`,`activityOfEvents_id`,`villes_france_id`,`contentEvent`) VALUES (events_id, :location, :budget, :maxParticipant, :difficulty, :dateOfEvents, :typeOfEvents_id, :users_id, :activityOfEvents_id, :villes_france_id, :contentEvent)';
+			$insertEvents = 'INSERT INTO `events`(`events_id`,`location`,`budget`,`maxParticipant`,`difficulty`,`dateOfEvents`,`typeOfEvents_id`,`users_id`,`activityOfEvents_id`,`villes_france_id`,`contentEvent`) VALUES (:events_id, :location, :budget, :maxParticipant, :difficulty, :dateOfEvents, :typeOfEvents_id, :users_id, :activityOfEvents_id, :villes_france_id, :contentEvent)';
             $eventStatement = $this->db->prepare($insertEvents);
             $eventStatement->bindValue(':events_id', $this->events_id,PDO::PARAM_INT);
 			$eventStatement->bindValue(':location', $this->location,PDO::PARAM_STR);
             $eventStatement->bindValue(':budget', $this->budget,PDO::PARAM_INT);
             $eventStatement->bindvalue(':maxParticipant',$this->maxParticipant,PDO::PARAM_INT);
-            $eventStatement->bindvalue(':difficulty',$this->difficulty,PDO::PARAM_STR);
+            $eventStatement->bindvalue(':difficulty',$this->difficulty,PDO::PARAM_INT);
             $eventStatement->bindvalue(':dateOfEvents',$this->dateOfEvents,PDO::PARAM_STR);
-            $eventStatement->bindvalue(':typeOfEvents_id',$this->typeOfEvents_id,PDO::PARAM_STR);
+            $eventStatement->bindvalue(':typeOfEvents_id',$this->typeOfEvents_id,PDO::PARAM_INT);
             $eventStatement->bindvalue(':users_id',$this->users_id,PDO::PARAM_INT);
             $eventStatement->bindvalue(':activityOfEvents_id',$this->activityOfEvents_id,PDO::PARAM_INT);
             $eventStatement->bindvalue(':villes_france_id',$this->villes_france_id,PDO::PARAM_INT);
-            $eventStatement->bindvalue(':contentEvent ',$this->contentEvent ,PDO::PARAM_STR);
+            $eventStatement->bindvalue(':contentEvent',$this->contentEvent,PDO::PARAM_STR);
 
 			return $eventStatement->execute();
         }
 
-       /*  public function readSingle()
+         public function readSingleEvents()
 		{
 			// :nomDeVariable pour les données en attentes
 			$sql_viewEvent = 'SELECT `events_id`,`typeOfEvents_id`,`location`, `budget`,`maxParticipant`,`difficulty`,`dateOfEvents`,`users_id` FROM `events` WHERE `events_id` = :events_id';
@@ -90,10 +90,15 @@ require_once dirname(__FILE__).'/../Models/villes_france.php';
 			return $eventView;
         }
         
-        public function readAll()
+        public function readAllEvents()
 		{
             // $offset = ($currentPage - 1) * $patientPerPage;
-            $eventList_sql = 'SELECT `events_id`,`admin_id`,`typeOfEvents_id`,`location`,`users_id`,`civility`, `budget`, `dateOfEvents` FROM `events` ORDER BY `dateOfPublication` ASC';
+            $eventList_sql = 'SELECT events.events_id,users.pseudo,events.location,events.budget,events.users_id,events.maxParticipant,activityOfEvents.activity,typeOfEvents.type,typeOfEvents.typeOfEvents_id,villes_france.ville_nom,villes_france.ville_code_postal, events.difficulty, DATE_FORMAT(`dateOfEvents`,"%d/%m/%Y") AS dateOfEvents_format,events.dateOfPublication,events.contentEvent FROM `events`
+            JOIN `activityOfEvents` ON events.activityOfEvents_id = activityOfEvents.activityOfEvents_id
+            JOIN `typeOfEvents` ON events.typeOfEvents_id = typeOfEvents.typeOfEvents_id
+            JOIN `villes_france` ON events.villes_france_id = villes_france.villes_france_id
+            JOIN `users` ON events.users_id = users.users_id
+             ORDER BY `dateOfPublication` ASC';
             $eventStatement = $this->db->prepare($eventList_sql);
             $eventList = [];
             if ($eventStatement->execute()) {
@@ -104,7 +109,7 @@ require_once dirname(__FILE__).'/../Models/villes_france.php';
             return $eventList;
         }
 
-        public function update()
+       /*  public function updateEvents()
         {
             $sqlUpdateEvent = 'UPDATE events SET location=:location,budget=:budget,typeOfEvents_id=:typeOfEvents_id,maxParticipant=:maxParticipant,difficulty=:difficulty,dateOfEvents=:dateOfEvents,users_id=:users_id WHERE events_id=:events_id';
             $usersStatement = $this->db->prepare($sqlUpdateEvent);
@@ -120,13 +125,11 @@ require_once dirname(__FILE__).'/../Models/villes_france.php';
             return $eventStatement->execute();
         }
 
-        public function delete()
+        public function deleteEvents()
         {
             $sqlDeleteEvent = 'DELETE FROM `events` WHERE `events_id`=:events_id';
             $eventDelete = $this->db->prepare($sqlDeleteEvent);
             $eventDelete->bindValue(':events_id', $this->events_id,PDO::PARAM_INT);
             return $eventDelete->execute();
-        }
-
-        ?> */
+        } */
     }

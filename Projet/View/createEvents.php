@@ -145,15 +145,11 @@ if ($isSubmitted && count($errors) > 0): ?>
                             </select>
                         </div>
                     </div>
-
-
+                    
                     <div class="form-group">
-                        <label for="contentEvent" class='text-white'><span
-                                class='text-white h5 border-bottom'>Un décriptif de l'événement :
-                            </span></label>
+                    <label for="contentEvent" class='text-white'><span class='text-white h5 border-bottom'>Un décriptif de l'événement : </span></label></label>
+                    <textarea class="form-control rounded m-auto" rows="5" style='width:30em;' id="contentEvent" name="contentEvent"></textarea>
                     </div>
-                    <textarea class='rounded mt-3' id="contentEvent" name="contentEvent" rows="5" cols="50">
-                            </textarea>
 
                     <div class="text-center"> <button type="submit" class="btn btn-warning " name='create'>Créér
                             l'évènement!</button></div>
@@ -170,7 +166,7 @@ if ($isSubmitted && count($errors) > 0): ?>
 <script src="../assets/libs/js/bootstrap.bundle.min.js"></script>
 <script src="../assets/libs/js/jquery.js"></script>
 <script src="../assets/js/script.js"></script>
-<!-- <script src="../assets/js/ajax.js"></script> -->
+<script src="../assets/js/ajax.js"></script> 
 
 </body>
 </html>

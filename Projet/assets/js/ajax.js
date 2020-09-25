@@ -7,6 +7,7 @@ function getVilles(){
 
     let monForm = new FormData();
     monForm.append("ville_code_postal",search);
+    monForm.append("codePS",search);
 
     if(search.length>=5){
         //Appel Ajax pour récupérer un tableau de villes correspondant au cp (search)
@@ -21,7 +22,7 @@ function getVilles(){
         .then(function(villes) {
             let options = '';
             villes.forEach(function(ville){
-                options += '<option value="'+ville.ville_nom+'">'+ville.ville_nom+'</option>';
+                options += '<option value="'+ville.villes_france_id+'">'+ville.ville_nom+'</option>';
             })
             document.getElementById("ville_nom").innerHTML = options;
         })
@@ -37,6 +38,7 @@ function getActivity(){
 
     let monFormActivity = new FormData();
     monFormActivity.append("typeOfEvents",search);
+    monFormActivity.append("typeEve",search);
 
     //Appel Ajax pour récupérer un tableau d'activité' correspondant au type (search)
     let param = {

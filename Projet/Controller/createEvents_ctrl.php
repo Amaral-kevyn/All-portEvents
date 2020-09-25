@@ -9,6 +9,32 @@ require_once dirname(__FILE__).'/../Models/villes_france.php';
 require_once dirname(__FILE__).'/../Models/appartenir.php';
 require_once dirname(__FILE__).'/../Controller/role_ctrl.php';
 
+$location=$budget=$maxParticipant=$contentEvent =$difficulty =$dateOfEvents= $dateOfPublication =$typeOfEvents_id=$activityOfEvents_id='';
+$errors = [];
+$post =[];
+
+if(isset($_POST['typeEve']) && isset($_POST['typeOfEvents'])){
+    $type = $_POST['typeOfEvents'];
+    $activityAll = array();
+
+    $appartenir = new appartenir();
+    $appartenir->typeOfEvents_id = $type;
+    $activityAll = $appartenir->getActivity();
+    echo json_encode($activityAll);
+    exit();
+}
+
+if(isset($_POST['codePS']) && isset($_POST['ville_code_postal'])){
+    $cpField = $_POST['ville_code_postal'];
+    $villes = array();
+
+    $villes_france = new villes_france();
+    $villes_france->ville_code_postal = $cpField;
+    $villes = $villes_france->getVilles();
+    echo json_encode($villes);
+    exit();
+} 
+
 if (!isset($_SESSION['user'])) {
     header('location:../Controller/login_ctrl.php#loginPlacement'); 
 }
@@ -21,31 +47,6 @@ if($_SESSION['user']['admin'] == $moderateur){
 $TypeOfEvents = new typeOfEvents();
 $resultsEvents = $TypeOfEvents->readAllTypeOfEvents();
 
-$location='29 rue';$budget='2';$maxParticipant='4';$contentEvent ='tamere'; $difficulty ='2';$dateOfEvents='1987/01/01'; $dateOfPublication ='';$typeOfEvents_id='1';$activityOfEvents_id='2';$ville_code_postal='4';$users_id='1';$cpField= "5";
-$errors = [];
-$post =[];
-/* 
-if($_SERVER['REQUEST_METHOD'] == 'POST' && (isset($_POST['typeOfEvents']))){
-    $type = $_POST['typeOfEvents'];
-    $activityAll = array();
-
-    $appartenir = new appartenir();
-    $appartenir->typeOfEvents_id = $type;
-    $activityAll = $appartenir->getActivity();
-    echo json_encode($activityAll);
-    exit();
-}
-
-if($_SERVER['REQUEST_METHOD'] == 'POST' && (isset($_POST['ville_code_postal']))){
-    $cpField = $_POST['ville_code_postal'];
-    $villes = array();
-
-    $villes_france = new villes_france();
-    $villes_france->ville_code_postal = $cpField;
-    $villes = $villes_france->getVilles();
-    echo json_encode($villes);
-    exit();
-} */
 
 $isSubmitted = false;
 //validation formulaire
@@ -92,29 +93,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['create'])) {
      }
     array_push($post,$dateOfEvents);
 
-
-    $activityOfEvents_id = trim(filter_input(INPUT_POST, 'activityOfEvents', FILTER_SANITIZE_NUMBER_INT));
-    if (empty($activityOfEvents_id)) {
-        $errors['activityOfEvents'] = 'Veuillez renseigner  la l\'activité de l\évènement';
-     }
-    array_push($post,$activityOfEvents_id);
-
-
     $contentEvent = trim(filter_input(INPUT_POST, 'contentEvent', FILTER_SANITIZE_STRING));
     if (empty($contentEvent)) {
         $errors['contentEvent'] = 'Veuillez renseigner  le déscriptif de l\évènement';
      }
     array_push($post,$contentEvent);
-var_dump($_POST);
+
+     $users_id = $_SESSION['user']['users_id'];
+     $type = $_POST['typeOfEvents'];
+     $cpField = $_POST['ville_code_postal'];
+     $activityOfEvents_id = $_POST['activityOfEvents'];
     
     if ($isSubmitted && count($errors) == 0){
-        $events = new events(0,$location,$budget,$maxParticipant,$difficulty,$dateOfEvents,$typeOfEvents_id,$users_id,$activityOfEvents_id,$cpField,$contentEvent);
+        $events = new events(0,$location,$budget,$maxParticipant,$difficulty,$dateOfEvents,'',$type,$users_id,$activityOfEvents_id,$cpField,$contentEvent);
         if ($events->createEvents()) {
             $eventCreated = true;    
         }
     }
 }
-
 
 require_once dirname(__FILE__).'/../Controller/header_ctrl.php';
 require_once dirname(__FILE__).'/../Controller/navbar_ctrl.php';
