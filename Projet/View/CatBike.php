@@ -21,4 +21,3 @@
 
 <?php
 include 'footer.php';
-?>

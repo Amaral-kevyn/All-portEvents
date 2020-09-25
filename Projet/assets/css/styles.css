@@ -48,7 +48,17 @@ html , body{
 /* .contenair-fluid img{
     margin-bottom: 2em;
 } */
+
 /*background Page*/
+
+.montain{
+  background-image: url("../../assets/img/montagnes-ile-reunion.jpg");
+  background-repeat: no-repeat;
+  border-radius: 5%;
+  z-index: 0;
+  opacity: 0.9;
+}
+
 .contenair-fluid{
 background: rgb(67, 68, 68) url('../img/backgroundHome Page/AHHHH (1).svg'); 
 background-size: contain; 
@@ -169,7 +179,7 @@ h6:hover{
 
 .card-body{
   background-image: url("../../assets/img/backgroundHome Page/text2.jpg");
-  background-repeat: no-repeat;
+  background-repeat: repeat;
 }
 /*animation card*/
 @keyframes pulse {
@@ -191,45 +201,20 @@ h6:hover{
 /*animation card*/
 
 /*Navbar*/
+.font{
+  font-family: 'Indie Flower';
+}
+.nav{
+position: fixed;
+z-index: 1;
+font-family: 'Indie Flower';
+}
 
-.sidenav {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #111;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
-    text-align:center;
-    
-  }
-  
-  .sidenav a {
-    padding: 70px 8px 10px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
-  
-  }
-  
-  .sidenav a:hover{
-    color: rgb(255, 140, 8);
-  }
-  
-  .sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-  }
+.nav:hover{
+  color: greenyellow;
+}
 
-  
+  /*Media queries*/
   
   @media screen and (max-height: 550px) {
     .sidenav {padding-top: 0.5em;}
@@ -246,20 +231,19 @@ h6:hover{
         font-size: 0.8em;
       }
   }
-  
-  
-  .font{
-    font-family: 'Indie Flower';
-  }
-  .nav{
-  position: fixed;
-  z-index: 1;
-  font-family: 'Indie Flower';
+
+  @media screen and (max-width: 400px) {
+    #HomeMaxScreen{
+      display:none;
+    }
   }
 
-  .nav:hover{
-    color: greenyellow;
+  @media screen and (min-width: 400px) {
+    #MinMaxScreen{
+      display:none;
+    }
   }
+  
 
   /*Image profil*/
   figure:hover figcaption {

@@ -48,12 +48,19 @@ if(isset($userCreated)):?>
                             value="<?=$birthdate?>" id="birthdate" type="date" name="birthdate" placeholder="Dave">
                         <div class="invalid-feedback bg-danger w-50 text-white m-auto"><?=$errors['birthdate'] ?? ""?></div>
                     </div>
-                    <div class="form-group has-success">
-                        <label class="form-control-label montserrat" for="zipCode">Code Postale :</label>
-                        <input type="text" value="<?=$zipCode?>" name="zipCode"
-                            class="form-control w-75 m-auto  <?=$isSubmitted && isset($errors['zipCode']) ? 'is-invalid' : ''?>"
-                            id=" zipCode" placeholder='ak.manon@gmail.com'>
-                        <div class="invalid-feedback bg-danger w-50 text-white m-auto"><?=$errors['zipCode'] ?? ""?></div>
+                
+                    <div class="form-group">
+                        <div>
+                            <label for="departmentCode" class='montserrat'>Département : </label>
+                            <input class="form-control w-75 m-auto" type="text" name="departmentCode"
+                                id="departmentCode">
+                        </div>
+                        <div>
+                            <label for="departmentName" class='montserrat mt-3'>Nom du département : </label>
+                            <select name="departmentName" id="departmentName">
+                                <option value=""></option>
+                            </select>
+                        </div>
                     </div>
                     <div class="form-group has-success">
                         <label class="form-control-label montserrat" for="email">Email :</label>
@@ -73,7 +80,7 @@ if(isset($userCreated)):?>
                         <label class="form-control-label montserrat" for="password">Mot de passe :</label>
                         <input type="password" value="<?=$password?>"
                             class="form-control w-75 m-auto  <?=$isSubmitted && isset($errors['password']) ? 'is-invalid' : ''?>"
-                            name="password" id="password">
+                            name="password" id="password"placeholder="1 majuscule,1nombre,1 caractère spécial">
                             
                             <div id="forcePassword">
 								<div class="force-progress w-100 rounded-pill">
@@ -88,7 +95,7 @@ if(isset($userCreated)):?>
                         <label class="form-control-label montserrat" for="verifPassword">Verification Mot de passe :</label>
                         <input type="password" value="<?=$verifPassword?>"
                             class="form-control w-75 m-auto  <?=$isSubmitted && isset($errors['verifPassword']) ? 'is-invalid' : ''?>"
-                            name="verifPassword" id="verifPassword">
+                            name="verifPassword" id="verifPassword" placeholder="Confirmer votre mot de passe">
                         <div class="invalid-feedback bg-danger w-50 text-white m-auto"><?=$errors['verifPassword'] ?? ""?></div>
                     </div>
                     <div class="row  justify-content-around">
@@ -110,96 +117,45 @@ if(isset($userCreated)):?>
 </div>
 
 
-<script src="assets/libs/js/jquery-3.4.1.min.js"></script>
-    <script src="assets/libs/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/libs/js/jquery.js"></script>
+<script src="../assets/libs/js/jquery-3.4.1.min.js"></script>
+<script src="../assets/libs/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/libs/js/jquery.js"></script>
     
-<script src="assets/js/script.js"></script>
+<script src="../assets/js/script.js"></script>
 
-<script type='text/javascript'>
-    
+<script>
+departmentNumber = document.getElementById("departmentCode");
+departmentNumber.addEventListener("keyup", getDepartment);
 
-		/* $("input[name='password']").focus(function(){
-			$("#forcePassword").slideDown();
-		}) */
+function getDepartment(){
+    let search = this.value;
 
-		// selectionne un élément et affique la fonction au keyup
-		$("input[name='password']").keyup(function () {
-            // prend la value du selecteur choisi prÃ©cÃ©dement
-            var password = $(this).val();
-            var force = 0;
+    let monFormDep = new FormData();
+    monFormDep.append("departmentCode",search);
+    monFormDep.append("ajaxCP",1);
 
-            // vÃ©rifie que la regex est true ou false
-            // var regex = (/(?=.*[a-z])/).test(password);
-
-            // vÃ©rifie que la value de l'input contient des lettres
-            // Si c'est le cas, la force prend +1
-            if (password.match(/(?=.*[a-z])/) || password.match(/(?=.*[A-Z])/)) {
-                force++;
-            }
-
-            // vÃ©rifie que la value de l'input contient des chiffres
-            if (password.match(/(?=.*[0-9])/)) {
-                force++;
-            }
-
-            // vÃ©rifie que la value de l'input contient des caractÃ¨res spÃ©ciaux
-            if (password.match(/(?=.*\W)/)) {
-                force++;
-            }
-
-
-            // vÃ©rifie que le password contient au moins 8 caractÃ¨res
-            if (password.length >= 8) {
-                force++;
-            }
-
-            // couleur en fonction de la force
-            var textForce = $("#force");
-            // couleur et texte en fonction de la force
-            if (force == 1) {
-                var bgColor = '#dc3545';
-                textForce.text('Faible');
-            } else {
-                if (force == 2) {
-                    var bgColor = '#ffc107';
-                    textForce.text('Moyen');
-                } else {
-                    if (force == 3) {
-                        var bgColor = '#28a745';
-                        textForce.text('Fort');
-                    } else {
-                        if (force == 4) {
-                            var bgColor = '#0d6e25';
-                            textForce.text('Très fort');
-                        }
-                    }
-                }
-            }
-            document.getElementById('progress').style.backgroundColor = bgColor;
-            document.getElementById('progress').style.width = 25 * force + '%';
-
-            //document.getElementById('progress').setAttribute('style', 'width:'+25*force+'%; background-color: '+bgColor);
-
-            // change le css de la progressbar
-            /*  $("#progress").css({
-            	'width': 25*force+'%',
-            	'background-color': bgColor
-            });  */
+    if(search.length>=2){
+        //Appel Ajax pour récupérer un tableau de departement correspondant au code (search)
+        let param = {
+            method: 'POST',
+            body: monFormDep
+        }
+        fetch('Inscription',param)
+        .then(function(response) {
+            return response.json();
         })
-        // fait disparaitre la progressbar quand on quitte le champ password
-        $("input[name='password']").blur(function () {
-            $("#forcePassword").slideUp();
+        .then(function(departmentAll) {
+            let options = '';
+            departmentAll.forEach(function(department){
+                options += '<option value="'+department.department_id+'">'+department.departmentName+'</option>';
+            })
+            document.getElementById("departmentName").innerHTML = options;
         })
-        // Fait apparaitre la progressbar quand on focus le champ password
-        document.querySelector(`input[name="password"]`).addEventListener('focus', function () {
-            let forcePassword = $("#forcePassword").slideDown();
-        })
-
-        /* $("input[name='password']").focus(function(){
-        	$("#forcePassword").slideDown();
-        }) */
+    }
+}
 </script>
+
+
 </body>
 
 </html>

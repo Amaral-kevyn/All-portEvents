@@ -1,26 +1,5 @@
-let inscript = document.querySelector('.inscript');
-    let formInscription = document.querySelector('.formIn');
-    let connected = document.querySelector('.connected');
-    let formConnected = document.querySelector('.formConnexion');
-    let imgProfile = document.querySelector('.imgProfile');
 
-    inscript.addEventListener('click', function () {
-        formInscription.classList.toggle("d-none");
-        inscript.classList.toggle("placementInscription");
-    });
-
-    connected.addEventListener('click', function () {
-        formConnected.classList.toggle("d-none");
-        imgProfile.classList.toggle("d-none");
-        connected.classList.toggle("placementConnected");
-    });
- 
-     if (window.matchMedia("(max-width: 600px)").matches) {
-        connected.classList.toggle("placementConnected");
-        inscript.classList.toggle("placementInscription");
-} 
-
-
+		
 		/* $("input[name='password']").focus(function(){
 			$("#forcePassword").slideDown();
 		}) */
@@ -90,17 +69,17 @@ let inscript = document.querySelector('.inscript');
             });  */
         })
         // fait disparaitre la progressbar quand on quitte le champ password
-        $("input[name='password']").blur(function () {
+        $("input[name='password']").blur(function(){
             $("#forcePassword").slideUp();
         })
         // Fait apparaitre la progressbar quand on focus le champ password
-        document.querySelector(`input[name="password"]`).addEventListener('focus', function () {
+       /*  document.querySelector(`input[name="password"]`).addEventListener('focus',function(){
             let forcePassword = $("#forcePassword").slideDown();
         })
-
-        /* $("input[name='password']").focus(function(){
+ */
+         $("input[name='password']").focus(function(){
         	$("#forcePassword").slideDown();
-        }) */
+        }) 
 
         $(function () {
           $('#navbarSupportedContent').on('click', '.nav-item', function () {

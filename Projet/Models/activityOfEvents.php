@@ -1,5 +1,5 @@
 <?php
-require_once dirname(__FILE__).'/../utils/Database.php';
+require_once dirname(__FILE__).'/../Utils/Database.php';
 require_once dirname(__FILE__).'/../Models/events.php';
 require_once dirname(__FILE__).'/../Models/typeOfEvents.php';
 require_once dirname(__FILE__).'/../Models/participate.php';

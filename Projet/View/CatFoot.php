@@ -20,4 +20,3 @@
 
 <?php
 include 'footer.php';
-?>

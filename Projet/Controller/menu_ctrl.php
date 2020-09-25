@@ -1,6 +1,5 @@
 <?php 
 session_start();
-
 require_once dirname(__FILE__).'/../Controller/role_ctrl.php';
 
 if (!isset($_SESSION['user'])) {

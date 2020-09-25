@@ -1,19 +1,29 @@
 <?php session_start();
-require_once dirname(__FILE__).'/../Models/user.php';
+$title = 'Modifier mon profil';
+require_once dirname(__FILE__).'/../Models/User.php';
+require_once dirname(__FILE__).'/../Models/department.php';
 require_once dirname(__FILE__).'/../Config/config.php';
 require_once dirname(__FILE__).'/../Utils/fonctions.php';
-$title = 'Modifier mon profil';
-
 require_once dirname(__FILE__).'/../Controller/role_ctrl.php';
 
+if(isset($_POST['ajaxDP']) && isset($_POST['departmentCode'])){ 
+    $departmentNumber = $_POST['departmentCode'];
+    $departmentAll = array();
+
+    $department = new department();
+    $department->departmentCode = $departmentNumber;
+    $departmentAll = $department->getDepartment();
+    echo json_encode($departmentAll); 
+    exit(); 
+ }
+
+ $extension = '';
 if($_SESSION['user']['admin'] == $moderateur){
     header('location: menu_ctrl.php?users_id='.$_SESSION['user']['admin']);
-   } 
-
+} 
 /* if ($_SESSION['user']['admin'] == '83714'){
     header('location:../Controller/listUsers_ctrl?users_id='.$_SESSION['user']['users_id']); 
 } */
-
 
 if (empty($_GET['users_id']) && empty($_POST['users_id'])){
     header('location:users_ctrl.php');
@@ -29,36 +39,36 @@ if (!empty($_GET['users_id']) || !empty($_POST['users_id'])) {
     $lastname = $usersInfos->lastname;
     $birthdate = $usersInfos->birthdate_format;
     $email = $usersInfos->email;
-    $zipCode = $usersInfos->zipCode;
     $civility = $usersInfos->civility;
     $pseudo = $usersInfos->pseudo;
     $photo = $usersInfos->photo;
-   
+    $department_id = $usersInfos->department_id;
 }
+
  if ($_SESSION['user']['users_id'] != $usersInfos->users_id){
     header('location:../Controller/listUsers_ctrl?users_id='.$_SESSION['user']['users_id']); 
 } 
 
+//validation des champs 
+$errors = [];
+$isSubmitted = false;
+$regexNames = '/^[a-zéèîïêëç]+((?:\-|\s)[a-zéèéîïêëç]+)?$/i';
+/* $regexPseudo = '/^([a-zA-Z0-9-_]{2,36})/$'; */
+$regexPassword = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).{8,}$/';
+$regexTelephone = '/^(?:\+33|0033|0)[1-79]((?:([\-\/\s\.])?[0-9]){2}){4}$/';
+$regexBirthday='/^((?:19|20)[0-9]{2})-((?:0[1-9])|(?:1[0-2]))-((?:0[1-9])|(?:1[0-9])|(?:2[0-9])|(?:3[01]))$/';
+$regexzipCode= '/^(?:[0-8]\d|9[0-8])\d{3}$/';
+$post=[];
 
-    //validation des champs 
-    $errors = [];
-    $isSubmitted = false;
-    $regexNames = '/^[a-zéèîïêëç]+((?:\-|\s)[a-zéèéîïêëç]+)?$/i';
-    /* $regexPseudo = '/^([a-zA-Z0-9-_]{2,36})/$'; */
-    $regexPassword = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).{8,}$/';
-    $regexTelephone = '/^(?:\+33|0033|0)[1-79]((?:([\-\/\s\.])?[0-9]){2}){4}$/';
-    $regexBirthday='/^((?:19|20)[0-9]{2})-((?:0[1-9])|(?:1[0-2]))-((?:0[1-9])|(?:1[0-9])|(?:2[0-9])|(?:3[01]))$/';
-    $regexzipCode= '/^(?:[0-8]\d|9[0-8])\d{3}$/';
-    $post=[];
-    $photo ='';
-    $extension = NULL;
+
+
     
-    
-    //validation formulaire
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['Modifier'])) {
-        $isSubmitted = true;
+//validation formulaire
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['Modifier'])) {
+    $isSubmitted = true;
 
         $users_id = (int) $_POST['users_id'];
+        $departmentNumber = $_POST['departmentCode'];
     
         ///--------------------------------------------
         $civility = trim(filter_input(INPUT_POST, 'civility', FILTER_SANITIZE_NUMBER_INT));
@@ -94,15 +104,6 @@ if (!empty($_GET['users_id']) || !empty($_POST['users_id'])) {
         }
         array_push($post,$firstname);
     
-        $zipCode = trim(filter_input(INPUT_POST, 'zipCode', FILTER_SANITIZE_NUMBER_INT));
-        // vérifier la validité de la valeur
-        if (empty($zipCode)) {
-            $errors['zipCode'] = 'Veuillez renseigner votre prenom';
-        } else if (!preg_match($regexzipCode, $zipCode)) {
-            $errors['zipCode'] = 'La valeur renseignée ne correspond pas au format attendu';
-        }
-        array_push($post,$zipCode);
-    
         $pseudo = trim(filter_input(INPUT_POST, 'pseudo', FILTER_SANITIZE_STRING));
         // vérifier la validité de la valeur
         if (empty($pseudo)) {
@@ -110,32 +111,52 @@ if (!empty($_GET['users_id']) || !empty($_POST['users_id'])) {
          }/* else if (!preg_match($regexPseudo, $pseudo)) {
             $errors['pseudo'] = 'La valeur renseignée ne correspond pas au format attendu';
         } */
+        $users = new Users('','','','','',$pseudo);
+        $usersPseudo = $users->readPregMatchPseudo();
+        
+        foreach ($usersPseudo as $pseudo2) {
+            $pseudoExist = $pseudo2->pseudo;
+        }
+
+        $users = new Users($users_id);
+        $usersView = $users->readSingle();
+
+        switch ($pseudo) {
+            case $usersView->pseudo:
+                $pseudo = $_POST['pseudo'];
+                break;
+             case $pseudoExist:
+                $errors['pseudo'] = 'Votre pseudo existe déja';
+                break; 
+             default:
+                $pseudo = $_POST['pseudo'];
+        }
         array_push($post,$pseudo);
     
-        $birthdate = trim(filter_input(INPUT_POST, 'birthdate', FILTER_SANITIZE_STRING));
-
-        if (!empty($birthdate)) {
-            
-            // FIN
-
-            // créé le timestamp d'aujourd'hui
-            $today = strtotime("NOW");
-            // timestamp de mon input date
-            $convertBirthdate = strtotime($birthdate);
-            if (!preg_match($regexBirthday, $birthdate)) {
-                $errors['birthdate'] = 'Veuillez renseigner une date correcte';
-            }
+         //Date de naissance
+    $birthdate = trim(filter_input(INPUT_POST, 'birthdate', FILTER_SANITIZE_STRING));
+    if (!empty($birthdate)) {
         
-            // vérifie que la date reste inférieur à NOW
-            elseif ($convertBirthdate > $today) {
-                $errors['birthdate'] = 'Votre date ne peut pas être supérieur à la date du jour';
-            }
-        }
-        else{
-            $errors['birthdate'] = 'Veuillez renseigner votre date de naissance';
-        }
+        // FIN
 
-        array_push($post,$birthdate);
+        // créé le timestamp d'aujourd'hui
+        $today = strtotime("NOW");
+        // timestamp de mon input date
+        $convertBirthdate = strtotime($birthdate);
+        if (!preg_match($regexBirthday, $birthdate)) {
+            $errors['birthdate'] = 'Veuillez renseigner une date correcte';
+        }
+    
+        // vérifie que la date reste inférieur à NOW
+        elseif ($convertBirthdate > $today) {
+            $errors['birthdate'] = 'Votre date ne peut pas être supérieur à la date du jour';
+        }
+    }
+    else{
+        $errors['birthdate'] = 'Veuillez renseigner votre date de naissance';
+    }
+    array_push($post,$birthdate);
+    //Date de naissance
             
         // validation du firstname
     
@@ -230,18 +251,19 @@ if ($isSubmitted && count($errors) == 0){
     $users->firstname = $firstname;
     $users->email = $email;
     $users->birthdate = $birthdate;
-    $users->zipCode = $zipCode;
     $users->pseudo = $pseudo;
     $users->civility = $civility;
     $users->photo = $extension;
+    $users->department_id = $departmentNumber;
+    /* $users->department_id = $department; */
     
     if ($users->update()) {
         $updateSuccess = true;
-          header('refresh:2; users_ctrl.php?users_id='.$_SESSION['user']['users_id']);  
+            header('refresh:2; users_ctrl.php?users_id='.$_SESSION['user']['users_id']);    
     }
-}  
-
-    
+}else{
+    $updateNOTSuccess = true;
+}
 
 require_once dirname(__FILE__).'/../Controller/header_ctrl.php';
 require_once dirname(__FILE__).'/../Controller/navbar_ctrl.php';

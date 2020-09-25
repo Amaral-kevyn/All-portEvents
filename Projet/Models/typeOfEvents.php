@@ -4,7 +4,7 @@ require_once dirname(__FILE__).'/../Models/events.php';
 require_once dirname(__FILE__).'/../Models/activityOfEvents.php';
 require_once dirname(__FILE__).'/../Models/participate.php';
 
-    class typeofevents
+    class typeOfEvents
     {
         private $typeOfEvents_id;
         private $type;
@@ -50,9 +50,8 @@ require_once dirname(__FILE__).'/../Models/participate.php';
 
         public function readAllTypeOfEvents()
 		{
-            $TypeOfEvents_sql = 'SELECT typeOfEvents_id, type FROM `typeOfEvents` WHERE typeOfEvents_id = :typeOfEvents_id ORDER BY `type` DESC';
-            $TypeOfEventsStatement = $this->db->prepare($TypeOfEvents_sql);
-            $TypeOfEventsStatement->bindvalue(':typeOfEvents_id',$this->typeOfEvents_id,PDO::PARAM_INT);
+            $TypeOfEvents_sql = 'SELECT `typeOfEvents_id`,`type` FROM `typeOfEvents`';
+            $TypeOfEventsStatement = $this->db->query($TypeOfEvents_sql);
             $TypeOfEvents = [];
             if ($TypeOfEventsStatement->execute()) {
                 if ($TypeOfEventsStatement instanceof PDOstatement ) {

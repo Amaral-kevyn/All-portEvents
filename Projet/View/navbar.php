@@ -3,10 +3,14 @@
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"> </span>
   </button>
-  <a class="navbar-brand font-weight-bold ml-auto mr-auto " href="../Accueil">
+  <a id='HomeMaxScreen' class="navbar-brand font-weight-bold ml-auto mr-auto" href="../Accueil">
     <h6 style="color: rgb(255, 140, 8);font-size='6em'; font-family: 'Montserrat', sans-serif;letter-spacing:-0.1em;"><i class="fa fa-home text-white"
         aria-hidden="true"></i> Accueil</h6>
   </a>
+  <a id='MinMaxScreen' class="navbar-brand font-weight-bold ml-auto mr-auto " href="../Accueil">
+   <i class="fa fa-home text-white h2" aria-hidden="true"></i>
+  </a>
+
   
   
 
@@ -62,21 +66,18 @@
 </div>
   <div class='imgProfilePc text-center'>
     <?php
-        if (isset($_SESSION['user']) && ($usersViews->photo != '')): ?>
+        if (isset($_SESSION['user']) && $photo != NULL): ?>
           <img class="img-fluid p-1" style="width:4em;border-radius:50%;" src="<?= $photo ?>" alt="profile picture">
         <?php else: ?>
             <img class="img-fluid p-1" style="width:4em;border-radius:50%;" src="../assets/img/avatar.jpg" alt="Avatar par default">
         <?php endif; 
 
     if (isset($_SESSION['user']['users_id'])){ ?>
-      <span class="montserrat text-capitalize p-1"
-        style=" color: rgb(255, 140, 8);"><?= /* Première lettre en MAJ */ substr($_SESSION['user']['pseudo'],0,6).'**'?></span>
+      <p><span class="montserrat text-capitalize p-1"
+        style=" color: rgb(255, 140, 8);"><?= /* Première lettre en MAJ */ substr($_SESSION['user']['pseudo'],0,6).'**'?></span></p>
     
     <?php
   }
 ?>
-
-
   </div>
-  
 </nav>

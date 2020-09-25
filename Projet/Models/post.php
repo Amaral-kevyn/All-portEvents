@@ -1,6 +1,6 @@
 <?php
-require_once dirname(__FILE__).'/../utils/Database.php';
-require_once dirname(__FILE__).'/../Models/user.php';
+require_once dirname(__FILE__).'/../Utils/Database.php';
+require_once dirname(__FILE__).'/../Models/User.php';
     class post
     {
         private $post_id;

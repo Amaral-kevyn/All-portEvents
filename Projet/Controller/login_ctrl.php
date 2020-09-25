@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once dirname(__FILE__) . '/../Models/user.php';
-
+$title = 'Se connecter';
+require_once dirname(__FILE__) . '/../Models/User.php';
 
 if (isset($_GET['logout'])) {
     // vide le tableau session
@@ -13,7 +13,6 @@ if (isset($_GET['logout'])) {
     header('location: ../Connexion#loginPlacement');
 }
 
-$title = 'se connecter';
 $email = '';
 $password = '';
 $emailExist = "";
@@ -66,8 +65,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['connexion'])) {
     }
 
 }
-
-
 
 require_once dirname(__FILE__) . '/../Controller/header_ctrl.php';
 require_once dirname(__FILE__).'/../Controller/navbar_ctrl.php';

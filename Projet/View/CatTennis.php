@@ -15,4 +15,3 @@
 
 <?php
 include 'footer.php';
-?>

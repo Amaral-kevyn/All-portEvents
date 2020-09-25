@@ -3,21 +3,21 @@
 
 <head>
     <meta charset="utf-8">
-    <link rel="shortcut icon" type="image/png" href="../assets/img/logo.png">
+    <link rel="shortcut icon" type="image/png" href="/assets/img/logo.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
-    <link rel="stylesheet" href="assets/libs/css/bootstrap.css">
-    <link rel="stylesheet" href="assets/libs/css/fontawesome.css">
+    <link rel="stylesheet" href="/assets/libs/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/libs/css/fontawesome.css">
 
     <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Sen:wght@700&display=swap"
         rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto:ital,wght@0,900;1,300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/6904c75444.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../assets/css/styles.css">
-    <link rel="stylesheet" href="../assets/css/Inscription.css">
-    <link rel="stylesheet" href="../assets/css/color.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/Inscription.css">
+    <link rel="stylesheet" href="/assets/css/color.css">
     <title>Evénement Rando</title>
 </head>
 
@@ -40,8 +40,8 @@
                 </div>
 
                 <div class="col-12 ml-2 text-left">
-                    <h4><a href="#">Organisez évenement<br>
-                            <i class="far fa-hand-pointer ml-5 text-white"></i></a></h4>
+                    <h4><a href="../Controller/createEvents_ctrl.php#CreateEvent" class='font-italic orange noirBackground rounded'>Organisez évenement
+                            <i class="far fa-hand-pointer pl-1 orange"></i></a></h4>
                 </div>
             </div>
         </div>

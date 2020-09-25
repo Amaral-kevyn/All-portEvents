@@ -1,8 +1,9 @@
 <?php
-require_once dirname(__FILE__).'/../utils/Database.php';
-require_once dirname(__FILE__).'/../Models/user.php';
+require_once dirname(__FILE__).'/../Utils/Database.php';
+require_once dirname(__FILE__).'/../Models/User.php';
 require_once dirname(__FILE__).'/../Models/post.php';
 require_once dirname(__FILE__).'/../Models/participate.php';
+require_once dirname(__FILE__).'/../Models/villes_france.php';
     class events
     {
         private $events_id;
@@ -14,10 +15,13 @@ require_once dirname(__FILE__).'/../Models/participate.php';
         private $dateOfPublication;
         private $typeOfEvents_id;
         private $users_id;
+        private $activityOfEvents_id;
+        private $villes_france_id;
+        private $contentEvent;
         private $db;
     
 
-        public function __construct($_events_id =0,$_location='',$_budget='',$_maxParticipant='',$_difficulty='',$_dateOfEvents='',$_dateOfPublication='',$_typeOfEvents_id='',$_users_id='')
+        public function __construct($_events_id =0,$_location='',$_budget=0,$_maxParticipant=0,$_difficulty=0,$_dateOfEvents='',$_dateOfPublication='',$_typeOfEvents_id=0,$_users_id=0,$_activityOfEvents_id=0,$_villes_france_id=0,$_contentEvent='')
         {
             
             $this->events_id = $_events_id;
@@ -29,6 +33,9 @@ require_once dirname(__FILE__).'/../Models/participate.php';
             $this->dateOfPublication = $_dateOfPublication;
             $this->typeOfEvents_id = $_typeOfEvents_id;
             $this->users_id = $_users_id;
+            $this->activityOfEvents_id = $_activityOfEvents_id;
+            $this->villes_france_id = $_villes_france_id;
+            $this->contentEvent = $_contentEvent;
             $this->db = Databases::getInstance();
         }
          // Création d'une méthode magique getter qui permettra de créer dynamiquement un getter pour chaque attribut existant.
@@ -51,24 +58,26 @@ require_once dirname(__FILE__).'/../Models/participate.php';
         //     }
         // }
 
-        public function create()
+        public function createEvents()
 		{
-			$insertEvents = 'INSERT INTO `users`(`location`,`budget`,`maxParticipant`,`difficulty`,`dateOfEvents`,`dateOfPublication`,`typeOfEvents_id`,`users_id`) VALUES (:location, :budget, :maxParticipant, :difficulty, :dateOfEvents, :dateOfPublication, :typeOfEvents_id, :users_id)';
+			$insertEvents = 'INSERT INTO `events`(`events_id`,`location`,`budget`,`maxParticipant`,`difficulty`,`dateOfEvents`,`typeOfEvents_id`,`users_id`,`activityOfEvents_id`,`villes_france_id`,`contentEvent`) VALUES (events_id, :location, :budget, :maxParticipant, :difficulty, :dateOfEvents, :typeOfEvents_id, :users_id, :activityOfEvents_id, :villes_france_id, :contentEvent)';
             $eventStatement = $this->db->prepare($insertEvents);
-            // $usersStatement->bindValue(':id_user', $this->id_user,PDO::PARAM_INT);
+            $eventStatement->bindValue(':events_id', $this->events_id,PDO::PARAM_INT);
 			$eventStatement->bindValue(':location', $this->location,PDO::PARAM_STR);
-            $eventStatement->bindValue(':budget', $this->budget,PDO::PARAM_STR);
-            $eventStatement->bindvalue(':maxParticipant',$this->maxParticipant,PDO::PARAM_STR);
+            $eventStatement->bindValue(':budget', $this->budget,PDO::PARAM_INT);
+            $eventStatement->bindvalue(':maxParticipant',$this->maxParticipant,PDO::PARAM_INT);
             $eventStatement->bindvalue(':difficulty',$this->difficulty,PDO::PARAM_STR);
             $eventStatement->bindvalue(':dateOfEvents',$this->dateOfEvents,PDO::PARAM_STR);
-            $eventStatement->bindvalue(':dateOfPublication',$this->dateOfPublication,PDO::PARAM_STR);
             $eventStatement->bindvalue(':typeOfEvents_id',$this->typeOfEvents_id,PDO::PARAM_STR);
             $eventStatement->bindvalue(':users_id',$this->users_id,PDO::PARAM_INT);
+            $eventStatement->bindvalue(':activityOfEvents_id',$this->activityOfEvents_id,PDO::PARAM_INT);
+            $eventStatement->bindvalue(':villes_france_id',$this->villes_france_id,PDO::PARAM_INT);
+            $eventStatement->bindvalue(':contentEvent ',$this->contentEvent ,PDO::PARAM_STR);
 
 			return $eventStatement->execute();
         }
 
-        public function readSingle()
+       /*  public function readSingle()
 		{
 			// :nomDeVariable pour les données en attentes
 			$sql_viewEvent = 'SELECT `events_id`,`typeOfEvents_id`,`location`, `budget`,`maxParticipant`,`difficulty`,`dateOfEvents`,`users_id` FROM `events` WHERE `events_id` = :events_id';
@@ -94,10 +103,11 @@ require_once dirname(__FILE__).'/../Models/participate.php';
             }
             return $eventList;
         }
+
         public function update()
         {
             $sqlUpdateEvent = 'UPDATE events SET location=:location,budget=:budget,typeOfEvents_id=:typeOfEvents_id,maxParticipant=:maxParticipant,difficulty=:difficulty,dateOfEvents=:dateOfEvents,users_id=:users_id WHERE events_id=:events_id';
-            $usersStatement = $this->db->prepare($sqlUpdateEvent;
+            $usersStatement = $this->db->prepare($sqlUpdateEvent);
             $eventStatement->bindValue(':events_id', $this->events_id,PDO::PARAM_INT);
             $eventStatement->bindValue(':location', $this->location,PDO::PARAM_STR);
             $eventStatement->bindValue(':budget', $this->budget,PDO::PARAM_STR);
@@ -109,6 +119,7 @@ require_once dirname(__FILE__).'/../Models/participate.php';
 
             return $eventStatement->execute();
         }
+
         public function delete()
         {
             $sqlDeleteEvent = 'DELETE FROM `events` WHERE `events_id`=:events_id';
@@ -117,5 +128,5 @@ require_once dirname(__FILE__).'/../Models/participate.php';
             return $eventDelete->execute();
         }
 
+        ?> */
     }
-        ?>

@@ -1,3 +1,4 @@
+
 cpField = document.getElementById("ville_code_postal");
 cpField.addEventListener("keyup", getVilles);
 
@@ -9,11 +10,11 @@ function getVilles(){
 
     if(search.length>=5){
         //Appel Ajax pour récupérer un tableau de villes correspondant au cp (search)
-        let options = {
+        let param = {
             method: 'POST',
             body: monForm
         }
-        fetch('createEvents_ctrl', options)
+        fetch('createEvents_ctrl.php',param)
         .then(function(response) {
             return response.json();
         })
@@ -25,4 +26,32 @@ function getVilles(){
             document.getElementById("ville_nom").innerHTML = options;
         })
     }
+}
+
+
+type = document.getElementById("typeOfEvents");
+type.addEventListener("change", getActivity);
+
+function getActivity(){
+    let search = this.value;
+
+    let monFormActivity = new FormData();
+    monFormActivity.append("typeOfEvents",search);
+
+    //Appel Ajax pour récupérer un tableau d'activité' correspondant au type (search)
+    let param = {
+        method: 'POST',
+        body: monFormActivity
+    }
+    fetch('createEvents_ctrl.php',param)
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(activityAll) {
+        let options = '';
+        activityAll.forEach(function(activity){
+            options += '<option value="'+activity.activityOfEvents_id+'">'+activity.activity+'</option>';
+        })
+        document.getElementById("activityOfEvents").innerHTML = options;
+    })
 }

@@ -1,29 +1,44 @@
 <?php 
 session_start();
-
-require_once dirname(__FILE__) . '/../Models/user.php';
 $title = 'S\'incrire';
-
+require_once dirname(__FILE__).'/../Models/User.php';
+require_once dirname(__FILE__).'/../Models/department.php';
 require_once dirname(__FILE__).'/../Controller/role_ctrl.php';
 
-$civility=$zipCode=$emailExist = $lastname =$email= $firstname =$password=$pseudo=$password=$birthdate=$admin_id= $verifPassword = "";
+
+//declaration de variable
+$civility=$departmentNumber=$emailExist=$pseudoExist = $lastname =$email= $firstname =$hashed_password=$pseudo=$password=$birthdate= $verifPassword = "";
+//Tableau d'erreur
 $errors = [];
+//drapeau
 $isSubmitted = false;
+//Regex
 $regexNames = '/^[a-zéèîïêëç]+((?:\-|\s)[a-zéèéîïêëç]+)?$/i';
 /* $regexPseudo = '/^([a-zA-Z0-9-_]{2,36})/$'; */
 $regexPassword = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).{8,}$/';
 $regexTelephone = '/^(?:\+33|0033|0)[1-79]((?:([\-\/\s\.])?[0-9]){2}){4}$/';
 $regexBirthday='/^((?:19|20)[0-9]{2})-((?:0[1-9])|(?:1[0-2]))-((?:0[1-9])|(?:1[0-9])|(?:2[0-9])|(?:3[01]))$/';
 $regexzipCode= '/^(?:[0-8]\d|9[0-8])\d{3}$/';
+//tableau de toute les variables
 $post=[];
-$photo = $_COOKIE['picture'] ?? 'avatar.jpg';
 
+if(isset($_POST['ajaxCP']) && isset($_POST['departmentCode'])){ 
+    $departmentNumber = $_POST['departmentCode'];
+    $departmentAll = array();
+
+    $department = new department();
+    $department->departmentCode = $departmentNumber;
+    $departmentAll = $department->getDepartment();
+    echo json_encode($departmentAll); 
+    exit(); 
+ } 
 
 
 //validation formulaire
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['inscription'])) {
     $isSubmitted = true;
 
+    //Civilité
     $civility = trim(filter_input(INPUT_POST, 'civility', FILTER_SANITIZE_NUMBER_INT));
     $filtercivility = filter_var($civility, FILTER_VALIDATE_INT, ["options" => ["min_range" => 1, "max_range" => 2]]);
     if (empty($civility)) {
@@ -33,8 +48,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['inscription'])) {
         $errors['civility'] = 'Veuillez renseigner le champs!';
     }
     array_push($post,$civility);
-    // valider 
+    //Civilité
 
+    //Nom de famille
     $lastname = trim(filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_STRING));
     // vérifier la validité de la valeur
     if (empty($lastname)) {
@@ -43,9 +59,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['inscription'])) {
         $errors['lastname'] = 'La valeur renseignée ne correspond pas au format attendu';
     }
     array_push($post,$lastname);
+    //Nom de famille
 
-    // validation du firstname
-
+    //Prénom
     $firstname = trim(filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_STRING));
     // vérifier la validité de la valeur
     if (empty($firstname)) {
@@ -54,25 +70,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['inscription'])) {
         $errors['firstname'] = 'La valeur renseignée ne correspond pas au format attendu';
     }
     array_push($post,$firstname);
+    //Prénom
 
-    $zipCode = trim(filter_input(INPUT_POST, 'zipCode', FILTER_SANITIZE_NUMBER_INT));
+    //Code postale
+    /* $zipCode = trim(filter_input(INPUT_POST, 'zipCode', FILTER_SANITIZE_NUMBER_INT));
     // vérifier la validité de la valeur
     if (empty($zipCode)) {
         $errors['zipCode'] = 'Veuillez renseigner votre prenom';
     } else if (!preg_match($regexzipCode, $zipCode)) {
         $errors['zipCode'] = 'La valeur renseignée ne correspond pas au format attendu';
     }
-    array_push($post,$zipCode);
+    array_push($post,$zipCode); */
+    //Code postale
 
+    //Pseudo
     $pseudo = trim(filter_input(INPUT_POST, 'pseudo', FILTER_SANITIZE_STRING));
     // vérifier la validité de la valeur
     if (empty($pseudo)) {
         $errors['pseudo'] = 'Veuillez renseigner votre pseudo';
-     }/* else if (!preg_match($regexPseudo, $pseudo)) {
-        $errors['pseudo'] = 'La valeur renseignée ne correspond pas au format attendu';
-    } */
+     }
+     $users = new Users('','','','','',$pseudo);
+     $usersPseudo = $users->readPregMatchPseudo();
+     
+     foreach ($usersPseudo as $pseudo2) {
+         $pseudoExist = $pseudo2->pseudo;
+     }
+     
+     if ($pseudo == $pseudoExist) {
+         $errors['pseudo'] = 'Votre pseudo existe déja';
+     }
     array_push($post,$pseudo);
+    //Pseudo
 
+    //Date de naissance
     $birthdate = trim(filter_input(INPUT_POST, 'birthdate', FILTER_SANITIZE_STRING));
     	if (!empty($birthdate)) {
     		
@@ -95,9 +125,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['inscription'])) {
     		$errors['birthdate'] = 'Veuillez renseigner votre date de naissance';
         }
         array_push($post,$birthdate);
+        //Date de naissance
         
-    // validation du firstname
-
+    //Email
     $email = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
     // vérifier la validité de la valeur
     if (empty($email)) {
@@ -114,8 +144,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['inscription'])) {
         $errors['email'] = 'Votre email existe déja';
     }
     array_push($post,$email);
+    //Email
     
-
+    //Mot de passe
     $password = trim(filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING));
     // vérifier la validité de la valeur
     if (empty($password)) {
@@ -123,33 +154,40 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['inscription'])) {
     } else if (!preg_match($regexPassword, $password)) {
         $errors['password'] = 'La valeur renseignée ne correspond pas au format attendu';
     }
+    //Mot de passe
   
-
+    //Verification  Mot de passe
     $verifPassword = trim(filter_input(INPUT_POST, 'verifPassword', FILTER_SANITIZE_STRING));
     if (empty('verifPassword')) {
-            $errors['verifPassword'] = 'Veuillez confirmer votre mot de passe';            
-        } else if ($password != $verifPassword){
-            $errors ['verifPassword'] = 'Les mots de passe ne correspondent pas';
-        }   else {
-            $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-        }
+        $errors['verifPassword'] = 'Veuillez confirmer votre mot de passe';            
+    } else if ($password != $verifPassword){
+        $errors ['verifPassword'] = 'Les mots de passe ne correspondent pas';
+    } else {
+        $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+    }
+    array_push($post,$hashed_password);
+    //Verification  Mot de passe
 
-        array_push($post,$hashed_password);
-
-        if (!isset($_POST['cgu'])) {
-            $errors['cgu'] = 'Veuillez cocher la case pour envoyer le formulaire.';
-        }
-        if ($isSubmitted && count($errors) == 0){
-            $users = new users(0,$lastname, $firstname, $birthdate, $email,$pseudo, $hashed_password,'',$zipCode,$civility,0,'','');
-            if ($users->create()) {
-                $userCreated = true;
-                header('location:../Controller/login_ctrl.php#loginPlacement'); 
+    //Verification  CGU
+    if (!isset($_POST['cgu'])) {
+        $errors['cgu'] = 'Veuillez cocher la case pour envoyer le formulaire.';
+    }
+    //Verification  CGU
+    $departmentNumber = $_POST['departmentCode'];
+    $roles_id = $utilisateur;
+    //Validation et creation de l'utilisateur
+    if ($isSubmitted && count($errors) == 0){
+        $users = new users(0,$lastname, $firstname, $birthdate, $email,$pseudo, $hashed_password,'',$civility,0,'','',$roles_id,$departmentNumber);
+        var_dump($users);
+        if ($users->create()) {
+            $userCreated = true;
+             header('location:../Controller/login_ctrl.php#loginPlacement'); 
                 
-            }
         }
-            
-
+    }       
 }
+
+
 require_once dirname(__FILE__).'/../Controller/header_ctrl.php';
 require_once dirname(__FILE__).'/../Controller/navbar_ctrl.php';
 require_once dirname(__FILE__).'/../View/navbarBottom.php';
