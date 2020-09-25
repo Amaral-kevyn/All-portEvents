@@ -9,9 +9,10 @@ require_once dirname(__FILE__).'/../Models/villes_france.php';
 require_once dirname(__FILE__).'/../Models/appartenir.php';
 require_once dirname(__FILE__).'/../Controller/role_ctrl.php';
 
-$location=$budget=$maxParticipant=$contentEvent =$difficulty =$dateOfEvents= $dateOfPublication =$typeOfEvents_id=$activityOfEvents_id='';
+$location=$budget=$maxParticipant=$contentEvent =$difficulty= $time=$dateOfEvents= $dateOfPublication =$typeOfEvents_id=$activityOfEvents_id='';
 $errors = [];
 $post =[];
+$regexDate='/^((?:19|20)[0-9]{2})-((?:0[1-9])|(?:1[0-2]))-((?:0[1-9])|(?:1[0-9])|(?:2[0-9])|(?:3[01]))$/';
 
 if(isset($_POST['typeEve']) && isset($_POST['typeOfEvents'])){
     $type = $_POST['typeOfEvents'];
@@ -86,16 +87,40 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['create'])) {
     }
     array_push($post,$difficulty);
 
-    $dateOfEvents = trim(filter_input(INPUT_POST, 'dateOfEvents', FILTER_SANITIZE_STRING));
+    $time = trim(filter_input(INPUT_POST, 'appt', FILTER_SANITIZE_STRING));
     // vérifier la validité de la valeur
-    if (empty($dateOfEvents)) {
-        $errors['dateOfEvents'] = 'Veuillez renseigner la date de l\'évènement';
-     }
+    if (empty($time)) {
+        $errors['appt'] = 'Veuillez renseigner l\'heure de l\'événement';
+    }
+    array_push($post,$time);
+
+    $dateOfEvents = trim(filter_input(INPUT_POST, 'dateOfEvents', FILTER_SANITIZE_STRING));
+    if (!empty($dateOfEvents)) {
+        
+        // FIN
+
+        // créé le timestamp d'aujourd'hui
+        $today = strtotime("NOW");
+        // timestamp de mon input date
+        $convertdateOfEvents = strtotime($dateOfEvents);
+        if (!preg_match($regexDate, $dateOfEvents)) {
+            $errors['dateOfEvents'] = 'Veuillez renseigner une date correcte';
+        }
+    
+        // vérifie que la date reste superieur à NOW
+        elseif ($convertdateOfEvents < $today) {
+            $errors['dateOfEvents'] = 'Votre date ne peut pas être inférieur à la date du jour';
+        }
+    }
+    else{
+        $errors['dateOfEvents'] = 'Veuillez renseigner votre date de naissance';
+    }
+    //Date événement
     array_push($post,$dateOfEvents);
 
     $contentEvent = trim(filter_input(INPUT_POST, 'contentEvent', FILTER_SANITIZE_STRING));
     if (empty($contentEvent)) {
-        $errors['contentEvent'] = 'Veuillez renseigner  le déscriptif de l\évènement';
+        $errors['contentEvent'] = 'Veuillez renseigner  le déscriptif de l\'évènement';
      }
     array_push($post,$contentEvent);
 
@@ -105,7 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['create'])) {
      $activityOfEvents_id = $_POST['activityOfEvents'];
     
     if ($isSubmitted && count($errors) == 0){
-        $events = new events(0,$location,$budget,$maxParticipant,$difficulty,$dateOfEvents,'',$type,$users_id,$activityOfEvents_id,$cpField,$contentEvent);
+        $events = new events(0,$location,$budget,$maxParticipant,$difficulty,$dateOfEvents,'',$type,$users_id,$activityOfEvents_id,$cpField,$contentEvent,$time);
         if ($events->createEvents()) {
             $eventCreated = true;    
         }

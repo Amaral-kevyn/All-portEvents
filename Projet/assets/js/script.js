@@ -1,5 +1,4 @@
 
-		
 		/* $("input[name='password']").focus(function(){
 			$("#forcePassword").slideDown();
 		}) */
@@ -81,7 +80,13 @@
         	$("#forcePassword").slideDown();
         }) 
 
+        //NAVBARR
         $(function () {
           $('#navbarSupportedContent').on('click', '.nav-item', function () {
               $('#navbarSupportedContent').toggleClass('show');
           })})
+          //NAVBARR
+
+        
+
+

@@ -18,10 +18,11 @@ require_once dirname(__FILE__).'/../Models/villes_france.php';
         private $activityOfEvents_id;
         private $villes_france_id;
         private $contentEvent;
+        private $time;
         private $db;
     
 
-        public function __construct($_events_id =0,$_location='',$_budget=0,$_maxParticipant=0,$_difficulty=0,$_dateOfEvents='',$_dateOfPublication='',$_typeOfEvents_id=0,$_users_id=0,$_activityOfEvents_id=0,$_villes_france_id=0,$_contentEvent='')
+        public function __construct($_events_id =0,$_location='',$_budget=0,$_maxParticipant=0,$_difficulty=0,$_dateOfEvents='',$_dateOfPublication='',$_typeOfEvents_id=0,$_users_id=0,$_activityOfEvents_id=0,$_villes_france_id=0,$_contentEvent='',$_time='')
         {
             
             $this->events_id = $_events_id;
@@ -36,6 +37,7 @@ require_once dirname(__FILE__).'/../Models/villes_france.php';
             $this->activityOfEvents_id = $_activityOfEvents_id;
             $this->villes_france_id = $_villes_france_id;
             $this->contentEvent = $_contentEvent;
+            $this->time = $_time;
             $this->db = Databases::getInstance();
         }
          // Création d'une méthode magique getter qui permettra de créer dynamiquement un getter pour chaque attribut existant.
@@ -60,7 +62,7 @@ require_once dirname(__FILE__).'/../Models/villes_france.php';
 
         public function createEvents()
 		{
-			$insertEvents = 'INSERT INTO `events`(`events_id`,`location`,`budget`,`maxParticipant`,`difficulty`,`dateOfEvents`,`typeOfEvents_id`,`users_id`,`activityOfEvents_id`,`villes_france_id`,`contentEvent`) VALUES (:events_id, :location, :budget, :maxParticipant, :difficulty, :dateOfEvents, :typeOfEvents_id, :users_id, :activityOfEvents_id, :villes_france_id, :contentEvent)';
+			$insertEvents = 'INSERT INTO `events`(`events_id`,`location`,`budget`,`maxParticipant`,`difficulty`,`dateOfEvents`,`typeOfEvents_id`,`users_id`,`activityOfEvents_id`,`villes_france_id`,`contentEvent`,`time`) VALUES (:events_id, :location, :budget, :maxParticipant, :difficulty, :dateOfEvents, :typeOfEvents_id, :users_id, :activityOfEvents_id, :villes_france_id, :contentEvent, :time)';
             $eventStatement = $this->db->prepare($insertEvents);
             $eventStatement->bindValue(':events_id', $this->events_id,PDO::PARAM_INT);
 			$eventStatement->bindValue(':location', $this->location,PDO::PARAM_STR);
@@ -73,6 +75,7 @@ require_once dirname(__FILE__).'/../Models/villes_france.php';
             $eventStatement->bindvalue(':activityOfEvents_id',$this->activityOfEvents_id,PDO::PARAM_INT);
             $eventStatement->bindvalue(':villes_france_id',$this->villes_france_id,PDO::PARAM_INT);
             $eventStatement->bindvalue(':contentEvent',$this->contentEvent,PDO::PARAM_STR);
+            $eventStatement->bindvalue(':time',$this->time,PDO::PARAM_STR);
 
 			return $eventStatement->execute();
         }
@@ -93,7 +96,7 @@ require_once dirname(__FILE__).'/../Models/villes_france.php';
         public function readAllEvents()
 		{
             // $offset = ($currentPage - 1) * $patientPerPage;
-            $eventList_sql = 'SELECT events.events_id,users.pseudo,events.location,events.budget,events.users_id,events.maxParticipant,activityOfEvents.activity,typeOfEvents.type,typeOfEvents.typeOfEvents_id,villes_france.ville_nom,villes_france.ville_code_postal, events.difficulty, DATE_FORMAT(`dateOfEvents`,"%d/%m/%Y") AS dateOfEvents_format,events.dateOfPublication,events.contentEvent FROM `events`
+            $eventList_sql = 'SELECT events.events_id,events.time,users.pseudo,events.location,events.budget,events.users_id,events.maxParticipant,activityOfEvents.activity,typeOfEvents.type,typeOfEvents.typeOfEvents_id,villes_france.ville_nom,villes_france.ville_code_postal, events.difficulty, DATE_FORMAT(`dateOfEvents`,"%d/%m/%Y") AS dateOfEvents_format,events.dateOfPublication,events.contentEvent FROM `events`
             JOIN `activityOfEvents` ON events.activityOfEvents_id = activityOfEvents.activityOfEvents_id
             JOIN `typeOfEvents` ON events.typeOfEvents_id = typeOfEvents.typeOfEvents_id
             JOIN `villes_france` ON events.villes_france_id = villes_france.villes_france_id

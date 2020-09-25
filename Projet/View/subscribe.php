@@ -45,14 +45,14 @@ if(isset($userCreated)):?>
                     <div class="form-group">
                         <label class="control-label montserrat" for="birthdate">Date de naissance :</label>
                         <input class="form-control w-75 m-auto  <?=$isSubmitted && isset($errors['birthdate']) ? 'is-invalid' : ''?>"
-                            value="<?=$birthdate?>" id="birthdate" type="date" name="birthdate" placeholder="Dave">
+                            value="<?=$birthdate?>" id="birthdate" type="date" max='2014-01-01' name="birthdate" placeholder="Dave">
                         <div class="invalid-feedback bg-danger w-50 text-white m-auto"><?=$errors['birthdate'] ?? ""?></div>
                     </div>
                 
                     <div class="form-group">
                         <div>
                             <label for="departmentCode" class='montserrat'>Département : </label>
-                            <input class="form-control w-75 m-auto" type="text" name="departmentCode"
+                            <input class="form-control w-75 m-auto" type="text" maxlength="3" name="departmentCode"
                                 id="departmentCode">
                         </div>
                         <div>

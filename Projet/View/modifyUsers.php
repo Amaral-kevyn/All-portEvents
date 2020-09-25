@@ -93,7 +93,7 @@
                     <div>
                         <div>
                             <label for="departmentCode" class='montserrat'>Département : </label>
-                            <input class="form-control" type="text" name="departmentCode"
+                            <input class="form-control" type="text" maxlength="3" name="departmentCode"
                                 id="departmentCode" value='<?= $usersInfos->departmentCode; ?>'>
                                 
                         </div>

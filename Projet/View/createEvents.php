@@ -116,10 +116,23 @@ if ($isSubmitted && count($errors) > 0): ?>
                         <label class="control-label montserrat" for="dateOfEvents">Date de l'évènement :</label>
                         <input
                             class="form-control w-75 m-auto  <?=$isSubmitted && isset($errors['dateOfEvents']) ? 'is-invalid' : ''?>"
-                            value="<?=$dateOfEvents?>" id="dateOfEvents" type="date" name="dateOfEvents"
+                            value="<?=$dateOfEvents?>" id="datePickerId" type="date" name="dateOfEvents"
                             placeholder="25/01/2021">
                         <div class="invalid-feedback bg-danger w-50 text-white m-auto">
                             <?=$errors['dateOfEvents'] ?? ""?></div>
+                    </div>
+
+                    <script>//DateMin
+         datePickerId.min = new Date().toISOString().split("T")[0];
+         //DateMin</script>
+
+                    <div class="form-group">
+                     <label for="appt">Choissisez l'heure de l'événement:</label>
+
+                            <input type="time" id="appt" name="appt"
+                                min="06:00" max="23:00" required>
+
+                            <small>Heures entre 06h00 et 23h00</small>
                     </div>
 
                     <div class="form-group">
@@ -136,7 +149,8 @@ if ($isSubmitted && count($errors) > 0): ?>
                         <div>
                             <label for="ville_code_postal" class='montserrat'>Code postal : </label>
                             <input class="form-control w-75 m-auto" type="text" name="ville_code_postal"
-                                id="ville_code_postal">
+                                id="ville_code_postal" maxlength="5">
+                                <p id="message"></p>
                         </div>
                         <div>
                             <label for="ville_nom" class='montserrat mt-3'>Ville : </label>
@@ -148,7 +162,7 @@ if ($isSubmitted && count($errors) > 0): ?>
                     
                     <div class="form-group">
                     <label for="contentEvent" class='text-white'><span class='text-white h5 border-bottom'>Un décriptif de l'événement : </span></label></label>
-                    <textarea class="form-control rounded m-auto" rows="5" style='width:30em;' id="contentEvent" name="contentEvent"></textarea>
+                    <textarea class="form-control rounded m-auto" maxlength="1200" type='text' rows="5" style='width:30em;' id="contentEvent" name="contentEvent"></textarea>
                     </div>
 
                     <div class="text-center"> <button type="submit" class="btn btn-warning " name='create'>Créér
