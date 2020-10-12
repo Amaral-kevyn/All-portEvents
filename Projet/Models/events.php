@@ -96,7 +96,7 @@ require_once dirname(__FILE__).'/../Models/villes_france.php';
         public function readAllEvents()
 		{
             // $offset = ($currentPage - 1) * $patientPerPage;
-            $eventList_sql = 'SELECT events.events_id,events.time,users.pseudo,events.location,events.budget,events.users_id,events.maxParticipant,activityOfEvents.activity,typeOfEvents.type,typeOfEvents.typeOfEvents_id,villes_france.ville_nom,villes_france.ville_code_postal, events.difficulty, DATE_FORMAT(`dateOfEvents`,"%d/%m/%Y") AS dateOfEvents_format,events.dateOfPublication,events.contentEvent FROM `events`
+            $eventList_sql = 'SELECT events.events_id,events.time,users.pseudo,events.location,events.budget,events.users_id,events.maxParticipant,activityOfEvents.activity,activityOfEvents.activityOfEvents_id,typeOfEvents.type,typeOfEvents.typeOfEvents_id,villes_france.ville_nom,villes_france.ville_code_postal, events.difficulty, DATE_FORMAT(`dateOfEvents`,"%d/%m/%Y") AS dateOfEvents_format,events.dateOfPublication,events.contentEvent FROM `events`
             JOIN `activityOfEvents` ON events.activityOfEvents_id = activityOfEvents.activityOfEvents_id
             JOIN `typeOfEvents` ON events.typeOfEvents_id = typeOfEvents.typeOfEvents_id
             JOIN `villes_france` ON events.villes_france_id = villes_france.villes_france_id

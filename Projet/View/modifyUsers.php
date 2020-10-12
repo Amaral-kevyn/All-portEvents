@@ -92,13 +92,13 @@
 
                     <div>
                         <div>
-                            <label for="departmentCode" class='montserrat'>Département : </label>
+                            <label for="departmentCode" class='montserrat text-white'>Département : </label>
                             <input class="form-control" type="text" maxlength="3" name="departmentCode"
                                 id="departmentCode" value='<?= $usersInfos->departmentCode; ?>'>
                                 
                         </div>
                         <div>
-                            <label for="departmentName" class='montserrat mt-3'>Nom du département : </label>
+                            <label for="departmentName" class='montserrat mt-3 text-white'>Nom du département : </label>
                             <select name="departmentName" id="departmentName">
                             <option value="<?= $usersInfos->department_id; ?>"><?= $usersInfos->departmentName; ?></option>
                                 <option value=""></option>
@@ -158,3 +158,5 @@ function getDepartment(){
     }
 }
 </script>
+<?php
+	include 'footer.php';

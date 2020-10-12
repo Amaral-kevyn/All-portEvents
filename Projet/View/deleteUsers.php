@@ -15,3 +15,6 @@
             <button class="btn btn-danger" type="submit">Supprimer</button>
     </form>
 </div>
+
+<?php
+	include 'footer.php';

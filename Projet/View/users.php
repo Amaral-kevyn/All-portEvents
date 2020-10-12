@@ -60,7 +60,7 @@
                                 <a class="btn btn-warning montserrat text-white col-12 mb-2"
                                         href="../Controller/modifyUsers_ctrl.php?users_id=<?= $_SESSION['user']['users_id']; ?>">Modifier
                                         mon profil</a>
-                                <a href='#' class='btn btn-outline-info text-white mb-2'>Participation Evénement </a>
+                                <a href='../Controller/myParticipation_ctrl.php?users_id=<?= $_SESSION['user']['users_id']; ?>' class='btn btn-outline-info text-white mb-2'>Participation Evénement </a>
                                 <a href='#' class='btn btn-outline-success text-white mb-2'>Evénement crée</a>
 
                         </div>

@@ -41,28 +41,45 @@ require_once dirname(__FILE__).'/../Models/activityOfEvents.php';
 
         public function createListEvents()
 		{
-			$insertevent = 'INSERT INTO `participate`(`users_id`,`event_id`) VALUES (:users_id, :event_id)';
+			$insertevent = 'INSERT INTO `participate`(`users_id`,`events_id`) VALUES (:users_id, :events_id)';
             $eventStatement = $this->db->prepare($insertevent);
-            // $users_idStatement->bindValue(':id_user', $this->id_user,PDO::PARAM_INT);
-			$eventStatement->bindValue(':users_id', $this->users_id,PDO::PARAM_INT);
-            $eventStatement->bindvalue(':event_id',$this->event_id,PDO::PARAM_INT);
+			$eventStatement->bindValue(':users_id',$this->users_id,PDO::PARAM_INT);
+            $eventStatement->bindvalue(':events_id',$this->events_id,PDO::PARAM_INT);
 			return $eventStatement->execute();
         }
 
-        public function getEvents(){
-            $sql = 'SELECT typeOfEvents.type,appartenir.typeOfEvents_id,activityOfEvents.activity,appartenir.activityOfEvents_id FROM `appartenir`
-            JOIN `activityOfEvents` ON appartenir.activityOfEvents_id = activityOfEvents.activityOfEvents_id
-            JOIN `typeOfEvents` ON appartenir.typeOfEvents_id = typeOfEvents.typeOfEvents_id
-            WHERE appartenir.typeOfEvents_id = :appartenir.typeOfEvents_id;';
+      /*   public function getEvents(){
+            $sql = 'SELECT participate.users_id,users.pseudo,participate.events_id FROM `participate`
+            JOIN `users` ON users.users_id = participate.users_id
+            JOIN `events` ON events.events_id = participate.events_id
+            WHERE participate.events_id = :events_id;';
             $statement = $this->db->prepare($sql);
-            $statement->bindValue(':typeOfEvents_id',$this->typeOfEvents_id, PDO::PARAM_INT);
+            $statement->bindValue(':events_id',$this->events_id, PDO::PARAM_INT);
             $resultsEvents = array();
             if($statement->execute()){
-                $resultsEvents = $statement->fetchAll(PDO::FETCH_ASSOC);
+                $resultsEvents = $statement->fetchAll(PDO::FETCH_OBJ);
             }
     
             return $resultsEvents;
-        }
+        } */
 
+         public function getUsersParticipate(){
+            $eventList_sql = 'SELECT participate.events_id,participate.users_id,events.time,users.pseudo,events.location,events.budget,events.users_id,events.maxParticipant,activityOfEvents.activity,activityOfEvents.activityOfEvents_id,typeOfEvents.type,typeOfEvents.typeOfEvents_id,villes_france.ville_nom,villes_france.ville_code_postal, events.difficulty, DATE_FORMAT(`dateOfEvents`,"%d/%m/%Y") AS dateOfEvents_format,events.dateOfPublication,events.contentEvent FROM `participate`
+            JOIN `events` ON events.events_id = participate.events_id
+            JOIN `users` ON users.users_id = participate.users_id
+            JOIN `activityOfEvents` ON events.activityOfEvents_id = activityOfEvents.activityOfEvents_id
+            JOIN `typeOfEvents` ON events.typeOfEvents_id = typeOfEvents.typeOfEvents_id
+            JOIN `villes_france` ON events.villes_france_id = villes_france.villes_france_id
+            WHERE participate.users_id = :users_id
+             ORDER BY `dateOfEvents` ASC';
+            $statementParticipate = $this->db->prepare($eventList_sql);
+            $statementParticipate->bindValue(':users_id',$this->users_id, PDO::PARAM_INT);
+            $resultsEventsParticipate = array();
+            if($statementParticipate->execute()){
+                $resultsEventsParticipate = $statementParticipate->fetchAll(PDO::FETCH_OBJ);
+            }
+    
+            return $resultsEventsParticipate;
+        } 
        
     }
