@@ -48,7 +48,7 @@ require_once dirname(__FILE__).'/../Models/activityOfEvents.php';
 			return $eventStatement->execute();
         }
 
-      /*   public function getEvents(){
+         public function getEvents(){
             $sql = 'SELECT participate.users_id,users.pseudo,participate.events_id FROM `participate`
             JOIN `users` ON users.users_id = participate.users_id
             JOIN `events` ON events.events_id = participate.events_id
@@ -61,7 +61,7 @@ require_once dirname(__FILE__).'/../Models/activityOfEvents.php';
             }
     
             return $resultsEvents;
-        } */
+        } 
 
          public function getUsersParticipate(){
             $eventList_sql = 'SELECT participate.events_id,participate.users_id,events.time,users.pseudo,events.location,events.budget,events.users_id,events.maxParticipant,activityOfEvents.activity,activityOfEvents.activityOfEvents_id,typeOfEvents.type,typeOfEvents.typeOfEvents_id,villes_france.ville_nom,villes_france.ville_code_postal, events.difficulty, DATE_FORMAT(`dateOfEvents`,"%d/%m/%Y") AS dateOfEvents_format,events.dateOfPublication,events.contentEvent FROM `participate`

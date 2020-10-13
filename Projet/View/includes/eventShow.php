@@ -1,4 +1,4 @@
- <div id='eventListPlace' class="card-user-list col-8 col-sm-6 col-md-3 mt-4 mb-4">
+ <div class="card-user-list col-8 col-sm-6 col-md-3 mt-4 mb-4">
         <div class="card-body bg-light text-center border rounded border-info">
                 <p class="card-text orange montserrat noirBackground ">Date de publication :<span
                                 class='text-white'>
@@ -72,6 +72,8 @@
                                         echo'Type';
                                 } ?></span></p>
 
+<details>
+    <summary class='text-white noirBackground font-weight-bold h5 mb-2'>Lieu et heure</summary>
 
                 <p class="card-text orange montserrat noirCard">Date événement : <span
                                 class='text-white'>
@@ -85,13 +87,15 @@
                                 <?= $event->ville_nom; ?></span></p>
                 <p class="card-text orange montserrat noirCard">Code Postale : <span class='text-white'>
                                 <?= $event->ville_code_postal; ?></span></p>
-
-
+</details>
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-toggle="modal"
+                <button type="button" class="btn btn-primary mt-2" data-toggle="modal"
                         data-target="#exampleModal<?= $event->events_id;?>">
                         + Voir plus
                 </button>
+         
+              <a class="btn btn-success text-white col-12 mt-2"
+                    href="../Controller/postAndListEvents_ctrl.php?events_id=<?= $event->events_id; ?>">Commentaires / Liste utilisateurs</a>
                 <!-- Modal -->
                 <div class="modal" id="exampleModal<?= $event->events_id;?>" tabindex="-1" role="dialog"
                         aria-labelledby="exampleModalLabel" aria-hidden="true">

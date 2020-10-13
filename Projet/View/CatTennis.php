@@ -9,7 +9,7 @@
                     <div class="row justify-content-around">
                         <?php if (count($eventsList) > 0) { 
                         foreach ($eventsList as $number => $event) { 
-                            if($event->typeOfEvents_id == '7' && $event->activityOfEvents_id == '8'){
+                            if($event->type == 'Tennis' && $event->activity== 'Match'){
                                 include 'includes/eventShow.php'; 
                         }}} else { ?>
                                 <h4 class="text-center text-white mt-4 mb-4">Aucun événements n'as été créer pour le moment.

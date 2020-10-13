@@ -4,12 +4,12 @@
                         <div class="card-body bg-light text-center border rounded border-info noirBackground m-auto"
                                 style='width:22em;'>
 
-                                <?php if (isset($_SESSION['user']) && ($photo != NULL)) : ?>
-                                <img class="card-img-top p-2 w-50" style="width:2em;border-radius:50%;"
-                                        src="<?= $photo ?>" alt="profile picture">
-                                <?php else: ?>
-                                <img class="card-img-top p-2 w-50" style="width:2em;border-radius:50%;"
+                                <?php if (isset($_SESSION['user']) && ($photo == '' || NULL )) : ?>
+                                        <img class="card-img-top p-2 w-50" style="width:2em;border-radius:50%;"
                                         src="../assets/img/avatar.jpg" alt="Avatar par default">
+                                <?php else: ?>
+                                        <img class="card-img-top p-2 w-50" style="width:2em;border-radius:50%;"
+                                        src="<?= $photo ?>" alt="profile picture">
                                 <?php endif; ?>
 
                                 <p class="card-text jaune montserrat noirBackground">Utilisateur n° : <span

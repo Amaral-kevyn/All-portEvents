@@ -81,6 +81,9 @@ foreach ($usersParticipate as $number => $participate) { ?>
                         + Voir plus
                 </button>
 
+                <a class="btn btn-success text-white col-12 mt-2"
+                    href="../Controller/postAndListEvents_ctrl.php?events_id=<?= $participate->events_id; ?>">Commentaires / Liste utilisateurs</a>
+
                 <!-- Modal -->
                 <div class="modal" id="exampleModal<?= $participate->events_id;?>" tabindex="-1" role="dialog"
                         aria-labelledby="exampleModalLabel" aria-hidden="true">

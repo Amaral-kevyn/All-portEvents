@@ -17,9 +17,6 @@ if (!isset($_SESSION['user'])) {
 $events = new events();
 $eventsList = $events->readAllEvents();
 
-$users_id= $_GET['users_id'];
-$participate = new participate($users_id,0);
-$eventsParticipate= $participate->getEvents();
 
 require_once dirname(__FILE__).'/../Controller/role_ctrl.php';
 require_once dirname(__FILE__).'/../Controller/header_ctrl.php';

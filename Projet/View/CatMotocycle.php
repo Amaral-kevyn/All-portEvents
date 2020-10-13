@@ -43,7 +43,7 @@
                               <h4 class="text-center text-white mt-4 mb-4">Aucun événements n'as été créer pour le moment.
                               </h4>
                       <?php } ?>
-                      </div>
+                     </div>
                 </div>
         </div>
       </div>

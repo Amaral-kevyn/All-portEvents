@@ -47,14 +47,14 @@ require_once dirname(__FILE__).'/../Models/User.php';
 
         public function createPost()
 		{
-			$insertPost = 'INSERT INTO `post`(`post_id`,`sentNamePost`,`users_id`,`users_id_receive`,`contentPost`) VALUES (:post_id, :sentNamePost, :users_id, :users_id_receive, :contentPost)';
+			$insertPost = 'INSERT INTO `post`(`post_id`,`sentNamePost`,`users_id`,`users_id_receive`,events_id,`contentPost`) VALUES (:post_id, :sentNamePost, :users_id, :users_id_receive, :events_id, :contentPost)';
             $postStatement = $this->db->prepare($insertPost);
             // $postStatement->bindValue(':id_user', $this->id_user,PDO::PARAM_INT);
 			$postStatement->bindValue(':post_id', $this->post_id,PDO::PARAM_INT);
             $postStatement->bindValue(':sentNamePost', $this->sentNamePost,PDO::PARAM_STR);
             $postStatement->bindvalue(':users_id',$this->users_id,PDO::PARAM_INT);
             $postStatement->bindvalue(':users_id_receive',$this->users_id_receive,PDO::PARAM_INT);
-           /*  $postStatement->bindvalue(':events_id',$this->events_id,PDO::PARAM_INT); */
+            $postStatement->bindvalue(':events_id',$this->events_id,PDO::PARAM_INT); 
             $postStatement->bindvalue(':contentPost',$this->contentPost,PDO::PARAM_STR);
 
 			return $postStatement->execute();
@@ -72,6 +72,20 @@ require_once dirname(__FILE__).'/../Models/User.php';
                 }
             }
             return $usersPost;
+        }
+
+        public function readAllPostEvents()
+		{
+            $EventsusersPost_sql = 'SELECT post_id, contentPost, dateOfPost, sentNamePost, users_id, users_id_receive,events_id FROM `post` WHERE events_id = :events_id ORDER BY `dateOfPost` DESC';
+            $EventsusersPostStatement = $this->db->prepare($EventsusersPost_sql);
+            $EventsusersPostStatement->bindvalue(':events_id',$this->events_id,PDO::PARAM_INT);
+            $EventsusersPost = [];
+            if ($EventsusersPostStatement->execute()) {
+                if ($EventsusersPostStatement instanceof PDOstatement ) {
+                    $EventsusersPost = $EventsusersPostStatement->fetchAll(PDO::FETCH_OBJ);
+                }
+            }
+            return $EventsusersPost;
         }
 
         public function readAllPostModerateur()
