@@ -5,10 +5,8 @@ require_once dirname(__FILE__).'/../Models/department.php';
 require_once dirname(__FILE__).'/../Controller/role_ctrl.php';
 
 $users_id = (int) $_SESSION['user']['users_id'];
-
 $users = new users($users_id);
 $usersView = $users->readSingle();
-
 
 if (!isset($_SESSION['user'])) {
     header('location:../Controller/login_ctrl.php#loginPlacement'); 

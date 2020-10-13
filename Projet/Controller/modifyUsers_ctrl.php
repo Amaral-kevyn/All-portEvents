@@ -5,7 +5,7 @@ require_once dirname(__FILE__).'/../Models/department.php';
 require_once dirname(__FILE__).'/../Config/config.php';
 require_once dirname(__FILE__).'/../Utils/fonctions.php';
 require_once dirname(__FILE__).'/../Controller/role_ctrl.php';
-
+//Utilisation d'ajax pour le code postale
 if(isset($_POST['ajaxDP']) && isset($_POST['departmentCode'])){ 
     $departmentNumber = $_POST['departmentCode'];
     $departmentAll = array();
@@ -29,7 +29,7 @@ if (empty($_GET['users_id']) && empty($_POST['users_id'])){
     header('location:users_ctrl.php');
     exit();
 }
-
+//Je récupère soit par POST ou GET pour effectuer le traitement
 if (!empty($_GET['users_id']) || !empty($_POST['users_id'])) {
     $users_id = $_POST['users_id'] ?? $_GET['users_id'];
     $users = new users($users_id);
@@ -165,6 +165,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['Modifier'])) {
         if (empty($email)) {
             $errors['email'] = 'Veuillez renseigner votre email';
         }
+        //Vérification de l'email pour qu'il n'y est pas 2 emails similaire
         $users = new Users('','','','',$email);
         $usersMail = $users->readPregMatchMail();
         
@@ -174,7 +175,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['Modifier'])) {
 
         $users = new Users($users_id);
         $usersView = $users->readSingle();
-
+        //Conditions différentes selon la situation,il est correspond il valide et sort du traitement
         switch ($email) {
             case $usersView->email:
                 $email = $_POST['email'];
@@ -187,7 +188,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['Modifier'])) {
         }
 
         array_push($post,$email);
-
 
         if(!empty($users_id)){
             // Si On reçoit une photo
@@ -242,9 +242,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['Modifier'])) {
 
 
     }
-
-    
-           
+//Validation si il n'y a pas derreur
 if ($isSubmitted && count($errors) == 0){
     $users = new Users($users_id);
     $users->lastname = $lastname;
@@ -257,6 +255,7 @@ if ($isSubmitted && count($errors) == 0){
     $users->department_id = $departmentNumber;
     /* $users->department_id = $department; */
     
+    //Modifie les informations 
     if ($users->update()) {
         $updateSuccess = true;
             header('refresh:2; users_ctrl.php?users_id='.$_SESSION['user']['users_id']);    

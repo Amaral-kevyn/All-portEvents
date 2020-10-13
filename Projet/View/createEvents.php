@@ -27,6 +27,7 @@ if ($isSubmitted && count($errors) > 0): ?>
                             class="form-control w-75 m-auto  <?=$isSubmitted && isset($errors['typeOfEvents']) ? 'is-invalid' : ''?>"
                             id="
                         typeOfEvents">
+                         <!--J'extrait les informations de resultEvents pour avoir les détails -->
                             <?php foreach($resultsEvents as $event){ ?>
                             <option value="<?=$event->typeOfEvents_id?>"><?= $event->type?></option>
                             <?php } ?>

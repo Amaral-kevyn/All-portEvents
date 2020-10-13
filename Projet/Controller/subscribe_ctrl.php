@@ -5,7 +5,6 @@ require_once dirname(__FILE__).'/../Models/User.php';
 require_once dirname(__FILE__).'/../Models/department.php';
 require_once dirname(__FILE__).'/../Controller/role_ctrl.php';
 
-
 //declaration de variable
 $civility=$departmentNumber=$emailExist=$pseudoExist = $lastname =$email= $firstname =$hashed_password=$pseudo=$password=$birthdate= $verifPassword = "";
 //Tableau d'erreur
@@ -32,7 +31,6 @@ if(isset($_POST['ajaxCP']) && isset($_POST['departmentCode'])){
     echo json_encode($departmentAll); 
     exit(); 
  } 
-
 
 //validation formulaire
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['inscription'])) {
@@ -71,17 +69,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['inscription'])) {
     }
     array_push($post,$firstname);
     //Prénom
-
-    //Code postale
-    /* $zipCode = trim(filter_input(INPUT_POST, 'zipCode', FILTER_SANITIZE_NUMBER_INT));
-    // vérifier la validité de la valeur
-    if (empty($zipCode)) {
-        $errors['zipCode'] = 'Veuillez renseigner votre prenom';
-    } else if (!preg_match($regexzipCode, $zipCode)) {
-        $errors['zipCode'] = 'La valeur renseignée ne correspond pas au format attendu';
-    }
-    array_push($post,$zipCode); */
-    //Code postale
 
     //Pseudo
     $pseudo = trim(filter_input(INPUT_POST, 'pseudo', FILTER_SANITIZE_STRING));
@@ -135,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['inscription'])) {
     }
     $users = new Users('','','','',$email);
     $usersMail = $users->readPregMatchMail();
-    
+    //Verification si l'email est déja en base de données
     foreach ($usersMail as $email2) {
         $emailExist = $email2->email;
     }
@@ -178,15 +165,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['inscription'])) {
     //Validation et creation de l'utilisateur
     if ($isSubmitted && count($errors) == 0){
         $users = new users(0,$lastname, $firstname, $birthdate, $email,$pseudo, $hashed_password,'',$civility,0,'','',$roles_id,$departmentNumber);
-        var_dump($users);
         if ($users->create()) {
             $userCreated = true;
-             header('location:../Controller/login_ctrl.php#loginPlacement'); 
-                
+            //Redirection apres validation de la création de l'utilisateur 
+             header('location:../Controller/login_ctrl.php#loginPlacement');    
         }
     }       
 }
-
 
 require_once dirname(__FILE__).'/../Controller/header_ctrl.php';
 require_once dirname(__FILE__).'/../Controller/navbar_ctrl.php';

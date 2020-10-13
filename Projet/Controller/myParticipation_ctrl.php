@@ -14,12 +14,11 @@ require_once dirname(__FILE__).'/../Controller/role_ctrl.php';
 if (!isset($_SESSION['user'])) {
     header('location:../Controller/login_ctrl.php#loginPlacement'); 
 }
-
+//Je récupère l'identifiant par GET , par l'url qui à été envoyer par la vue !
 $users_id= $_GET['users_id'];
+//J'instancie la class participate
 $participate = new participate($users_id,0);
 $usersParticipate = $participate->getUsersParticipate();
-
-
 
 require_once dirname(__FILE__).'/../Controller/header_ctrl.php';
 require_once dirname(__FILE__).'/../Controller/navbar_ctrl.php';

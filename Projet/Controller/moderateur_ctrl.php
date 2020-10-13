@@ -4,7 +4,6 @@ require_once dirname(__FILE__).'/../Models/user.php';
 require_once dirname(__FILE__).'/../Models/post.php';
 require_once dirname(__FILE__).'/../Controller/role_ctrl.php';
 
-
 if ($_SESSION['user']['admin'] == $moderateur || $_SESSION['user']['admin'] == $admin ){
     $users_id = $_GET['users_id'];
 
@@ -23,7 +22,6 @@ if (!isset($_SESSION['user'])) {
 }
 
 if (!isset($_GET['users_id']) && isset($_SESSION['user'])){
-    
     header('location:../Controller/users_ctrl?users_id='.$_SESSION['user']['users_id']); 
 }
 

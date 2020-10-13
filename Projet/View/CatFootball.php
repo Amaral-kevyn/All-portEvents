@@ -4,6 +4,7 @@
                 <div class="col-12 text-center my-5 text-white">
                     <h2>Choisit le style d'evenement que tu veux faire</h2>
                 </div>
+                 <!--Carte de la catégorie football avec l'activité match-->
                 <div class="col-12">
                     <h3 id='motoBalade' class='text-center text-white h1' style='border-bottom: 1rem solid;'>Match</h3>
                       <div class="row justify-content-around">
@@ -16,8 +17,8 @@
                                 </h4>
                         <?php } ?>
                         </div>
-                          
                 </div>
+                <!--Carte de la catégorie football avec l'activité freestyle-->
                 <div id='FreestyleFootball' class="col-12">
                     <h3 class='text-center text-white h1' style='border-bottom: 1rem solid;'>Freestyle</h3>
                     <div class="row justify-content-around">
@@ -31,7 +32,7 @@
                         <?php } ?>
                         </div>
                 </div>
-
+                <!--Carte de la catégorie football avec l'activité foot salle-->
                 <div id='FootSalleFootball' class="col-12">
                     <h3 class='text-center text-white h1' style='border-bottom: 1rem solid;'>Foot Salle</h3>
                     <div class="row justify-content-around">

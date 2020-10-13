@@ -12,13 +12,14 @@ if (isset($_GET['logout'])) {
     session_destroy();
     header('location: ../Connexion#loginPlacement');
 }
-
+// Je déclare les variables en chaines vide pour qu'elles soient reconnus lors de la lecture de la page
 $email = '';
 $password = '';
 $emailExist = "";
 $isSubmitted = false;
 $success = false;
 
+// Vérification du formulaires
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['connexion'])) {
     $isSubmitted = true;
     if (isset($email) && isset($password)) {
@@ -43,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['connexion'])) {
         $user->email = $email;
         $user->password = $password;
 
-        
+        //Si la vérification est bonne et sans erreur , je créé une session contenant le pseudo,email,role,et l'identifiant
         if($user->connect()) {
             $userCo = $user->connect();
 
@@ -56,6 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['connexion'])) {
                 $success =true;
                  header('location:../Controller/users_ctrl.php?users_id='.$_SESSION['user']['users_id']); 
             }
+            //Sinon un message d'erreur apparait et ne valide pas l'inscription
             else{
                 $errors['email'] = 'votre email ou votre mot de passe est incorrect!';
                 $success = false;

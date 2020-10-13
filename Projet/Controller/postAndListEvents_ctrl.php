@@ -17,17 +17,17 @@ if (!isset($_SESSION['user'])) {
 
 $events_id = $_GET['events_id'];
 $users_id= $_SESSION['user']['users_id'];
-
+// J'instancie la class post pour le read all
 $post = new post(0,'','','','',$events_id,'');
 $usersPostEvents = $post->readAllPostEvents();
 
+// J'instancie la class user pour le read single
 $user = new users($users_id);
 $usersPostInfo = $user->readSingle(); 
 
+// J'instancie la class participate pour le read
 $participate = new participate(0,$events_id);
 $eventsParticipate= $participate->getEvents();
-
-//==== création des variables de regex ====//
 
 //==== validation du formulaire ====//
 $contentPost = '';
@@ -45,6 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sentNamePost = $_SESSION['user']['pseudo'];
     $events_id = $_GET['events_id'];
 
+    //Validation si il n'y a pas d'erreur
     if ($isSubmitted && count($errors) == 0) {
         $post = new Post(0,'',$sentNamePost,0,$users_id_receive,$events_id,$contentPost);
         var_dump($post);

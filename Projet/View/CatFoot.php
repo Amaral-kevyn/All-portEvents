@@ -3,8 +3,8 @@
             <div class="row">
                 <div class="col-12 text-center my-5 text-white">
                     <h2>Choisit le style d'evenement que tu veux faire</h2>
-                    
                 </div>
+                <!--Carte de la catégorie course à pied avec l'activité balade-->
                 <div class="col-12">
                     <h3 id='footBalade' class='text-center text-white h1' style='border-bottom: 1rem solid;'>Balade</h3>
                     <div class="row justify-content-around">
@@ -16,9 +16,9 @@
                                 <h4 class="text-center text-white mt-4 mb-4">Aucun événements n'as été créer pour le moment.
                                 </h4>
                         <?php } ?>
-                        </div>
-                        
+                        </div>  
                 </div>
+                <!--Carte de la catégorie course à pied avec l'activité trails-->
                 <div class="col-12">
                     <h3 id='footTrails' class='text-center text-white h1' style='border-bottom: 1rem solid;'>Trails</h3>
                     <div class="row justify-content-around">
@@ -32,7 +32,7 @@
                         <?php } ?>
                         </div>
                 </div>
-
+                <!--Carte de la catégorie course à pied avec l'activité course-->
                 <div class="col-12">
                     <h3 id='footCourse' class='text-center text-white h1' style='border-bottom: 1rem solid;'>Course</h3>
                     <div class="row justify-content-around">
